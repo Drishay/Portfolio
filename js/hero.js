@@ -49,13 +49,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function nextScene() {
-    index += 1;
+    const list = scenes[getTheme()];
+    let nextIndex = Math.floor(Math.random() * list.length);
+
+    // Avoid showing the same scene twice in a row.
+    if (list.length > 1 && nextIndex === index % list.length) {
+      nextIndex = (nextIndex + 1) % list.length;
+    }
+
+    index = nextIndex;
     renderScene(true);
   }
 
   function restart() {
     clearInterval(timer);
-    timer = window.setInterval(nextScene, 8500);
+    timer = window.setInterval(nextScene, 3000);
   }
 
   // Render immediately from the real SVG path.
@@ -63,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
   restart();
 
   document.addEventListener("themechange", () => {
-    index = 0;
+    index = Math.floor(Math.random() * scenes[getTheme()].length);
     renderScene(true);
     restart();
   });
