@@ -249,15 +249,16 @@ html[data-theme="night"] .nav__links a.active::after {
 
 .hero__quote {
   margin: 0;
-  color: var(--warm);
+  color: #fff; 
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: -0.01em;
   transition: color var(--transition), opacity 400ms ease, transform 400ms ease;
 }
 
-html[data-theme="night"] .hero__quote {
-  color: var(--accent);
+html[data-theme="night"] .hero__quote,
+html[data-theme="anime"] .hero__quote {
+  color: #fff;
 }
 
 html[data-theme="day"] .hero__author {
@@ -877,15 +878,19 @@ html[data-theme="night"] .meta {
 
 .page-hero__quote {
   margin: 0;
-  color: #70430d;
-  font-size: clamp(1.8rem, 3.5vw, 2rem);
+  width: min(100%, 760px);
+  margin-inline: auto;
+  color: #fff;
+  font-size: clamp(2rem, 4vw, 2.5rem);
   font-weight: 800;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
+  line-height: 1.22;
+  letter-spacing: -0.025em;
 }
 
-html[data-theme="night"] .page-hero__quote {
-  color: #d9e9f7;
+html[data-theme="day"] .page-hero__quote,
+html[data-theme="night"] .page-hero__quote,
+html[data-theme="anime"] .page-hero__quote {
+  color: #fff;
 }
 
 @media (max-width: 780px) {
@@ -1019,8 +1024,9 @@ html.scrollbar-visible::-webkit-scrollbar-thumb {
   }
 }
 
-/* Calmer secondary-page hero quotes */
-.page-hero__quote{width:min(100%,620px);margin-inline:auto;font-size:clamp(.82rem,1.35vw,.96rem);line-height:1.45;font-weight:500;letter-spacing:-.01em;opacity:.9}.page-hero__author{margin-top:.5rem;font-size:.72rem;opacity:.7}@media(max-width:780px){.page-hero__quote{width:min(100%,420px);font-size:.82rem}}
+/* Secondary-page hero quote sizing */
+.page-hero__author { margin-top: .5rem; font-size: .72rem; opacity: .7; }
+@media (max-width: 780px) { .page-hero__quote { font-size: 2rem; } }
 
 
 /* Compact category filters — keeps Skills and Projects visually calm */
@@ -1040,13 +1046,20 @@ html[data-theme="anime"] body {
 
 html[data-theme="anime"] .nav {
   background: rgba(7, 12, 29, 0.82);
-  border-bottom-color: rgba(72, 199, 255, 0.20);
+  border-bottom-color: rgba(255, 193, 90, 0.28);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
 }
 
 html[data-theme="anime"] .brand {
-  color: var(--accent);
-  text-shadow: 0 0 16px rgba(72, 199, 255, 0.38);
+  color: var(--warm);
+  text-shadow: 0 0 16px rgba(255, 193, 90, 0.34);
+}
+
+html[data-theme="anime"] .nav__links a:hover,
+html[data-theme="anime"] .mobile-menu a:hover,
+html[data-theme="anime"] .text-link:hover {
+  color: var(--warm);
+  text-shadow: 0 0 12px rgba(255, 193, 90, 0.32);
 }
 
 html[data-theme="anime"] .nav__links a.active {
@@ -1054,11 +1067,30 @@ html[data-theme="anime"] .nav__links a.active {
   text-shadow: 0 0 14px rgba(255, 193, 90, 0.42);
 }
 
+html[data-theme="anime"] .nav__links a.active::after {
+  background: var(--warm);
+  box-shadow: 0 0 10px rgba(255, 193, 90, 0.55);
+}
+
+html[data-theme="anime"] .resume-link:hover {
+  border-color: var(--warm);
+  background: rgba(255, 193, 90, 0.10);
+  color: var(--warm) !important;
+  box-shadow: 0 0 18px rgba(255, 193, 90, 0.16);
+}
+
 html[data-theme="anime"] .theme-toggle {
-  border-color: rgba(72, 199, 255, 0.36);
-  background: rgba(16, 24, 49, 0.82);
-  color: var(--accent);
-  box-shadow: 0 0 18px rgba(72, 199, 255, 0.12);
+  border-color: rgba(255, 193, 90, 0.45);
+  background: rgba(17, 24, 48, 0.90);
+  color: var(--warm);
+  box-shadow: 0 0 18px rgba(255, 193, 90, 0.14);
+}
+
+html[data-theme="anime"] .theme-toggle:hover,
+html[data-theme="anime"] .menu-toggle:hover {
+  border-color: var(--warm);
+  color: var(--warm);
+  box-shadow: 0 0 20px rgba(255, 193, 90, 0.20);
 }
 
 html[data-theme="anime"] .hero::after,
@@ -1080,8 +1112,7 @@ html[data-theme="anime"] .hero__overlay {
 
 html[data-theme="anime"] .hero__quote,
 html[data-theme="anime"] .page-hero__quote {
-  color: #ffffff;
-  text-shadow: 0 0 18px rgba(72, 199, 255, 0.28);
+  color: #fff;
 }
 
 html[data-theme="anime"] .hero__author,
@@ -1091,7 +1122,8 @@ html[data-theme="anime"] .page-hero__author {
 
 html[data-theme="anime"] .section-label,
 html[data-theme="anime"] .meta,
-html[data-theme="anime"] .timeline__year {
+html[data-theme="anime"] .timeline__year,
+html[data-theme="anime"] .status {
   color: var(--warm);
 }
 
@@ -1102,42 +1134,54 @@ html[data-theme="anime"] .section--soft {
 }
 
 html[data-theme="anime"] .glass-card {
-  border-color: rgba(72, 199, 255, 0.16);
+  border-color: rgba(255, 193, 90, 0.16);
   box-shadow:
     0 18px 55px rgba(0, 0, 0, 0.30),
     inset 0 1px 0 rgba(255, 255, 255, 0.045);
 }
 
 html[data-theme="anime"] .glass-card:hover {
-  border-color: rgba(72, 199, 255, 0.46);
+  border-color: rgba(255, 193, 90, 0.50);
   box-shadow:
     0 18px 55px rgba(0, 0, 0, 0.34),
-    0 0 28px rgba(72, 199, 255, 0.10);
+    0 0 28px rgba(255, 193, 90, 0.13);
+  transform: translateY(-4px);
 }
 
 html[data-theme="anime"] .button--primary,
 html[data-theme="anime"] .filter:hover,
 html[data-theme="anime"] .filter.active {
-  background: linear-gradient(135deg, var(--accent), var(--anime-violet));
-  border-color: transparent;
-  color: #06101f;
-  box-shadow: 0 0 22px rgba(72, 199, 255, 0.22);
+  background: linear-gradient(135deg, var(--warm), #ff8f3d);
+  border-color: var(--warm);
+  color: #10131e;
+  box-shadow: 0 0 22px rgba(255, 193, 90, 0.22);
 }
 
-html[data-theme="anime"] .resume-link:hover,
-html[data-theme="anime"] .text-link:hover {
-  color: var(--accent) !important;
-  text-shadow: 0 0 12px rgba(72, 199, 255, 0.28);
+html[data-theme="anime"] .button--ghost:hover {
+  border-color: var(--warm);
+  color: var(--warm);
+  box-shadow: 0 0 18px rgba(255, 193, 90, 0.14);
+}
+
+html[data-theme="anime"] .badge:hover,
+html[data-theme="anime"] .chips span:hover {
+  border-color: var(--warm);
+  color: var(--warm);
 }
 
 html[data-theme="anime"] .ask-drishay__button {
-  border-color: rgba(72, 199, 255, 0.28);
-  box-shadow: 0 0 24px rgba(72, 199, 255, 0.12), var(--shadow);
+  border-color: rgba(255, 193, 90, 0.30);
+  box-shadow: 0 0 24px rgba(255, 193, 90, 0.12), var(--shadow);
 }
 
 html[data-theme="anime"] .ask-drishay__button::before {
-  background: var(--anime-hot);
-  box-shadow: 0 0 14px rgba(255, 85, 127, 0.70);
+  background: var(--warm);
+  box-shadow: 0 0 14px rgba(255, 193, 90, 0.70);
+}
+
+html[data-theme="anime"] .ask-drishay__input button {
+  background: var(--warm);
+  color: #10131e;
 }
 
 html[data-theme="anime"] .cursor-glow {
@@ -1147,7 +1191,7 @@ html[data-theme="anime"] .cursor-glow {
 }
 
 html[data-theme="anime"] {
-  --scroll-thumb: rgba(72, 199, 255, 0.78);
+  --scroll-thumb: rgba(255, 193, 90, 0.80);
 }
 
 .anime-petals {
