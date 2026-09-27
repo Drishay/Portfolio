@@ -38,18 +38,20 @@ html[data-theme="night"] {
 }
 
 html[data-theme="anime"] {
-  --bg: #fff8f3;
-  --surface: rgba(255, 255, 255, 0.68);
-  --surface-solid: #fffdfb;
-  --surface-soft: rgba(255, 238, 241, 0.52);
-  --text: #241d2b;
-  --text-muted: #6f6474;
-  --border: rgba(77, 52, 74, 0.14);
-  --accent: #d85b78;
-  --warm: #a84461;
-  --hero-overlay: linear-gradient(180deg, rgba(255, 248, 243, 0.04), rgba(63, 38, 55, 0.48));
-  --shadow: 0 18px 55px rgba(96, 53, 75, 0.12);
-  --glass-border: rgba(216, 91, 120, 0.22);
+  --bg: #080d1c;
+  --surface: rgba(16, 24, 49, 0.72);
+  --surface-solid: #10182f;
+  --surface-soft: rgba(19, 29, 57, 0.62);
+  --text: #f2f6ff;
+  --text-muted: #aab7d2;
+  --border: rgba(132, 163, 220, 0.18);
+  --accent: #48c7ff;
+  --warm: #ffc15a;
+  --anime-hot: #ff557f;
+  --anime-violet: #8c6cff;
+  --hero-overlay: linear-gradient(180deg, rgba(8, 15, 35, 0.10), rgba(4, 8, 23, 0.86));
+  --shadow: 0 22px 75px rgba(0, 0, 0, 0.48);
+  --glass-border: rgba(72, 199, 255, 0.22);
 }
 
 * { box-sizing: border-box; }
@@ -1028,38 +1030,63 @@ html.scrollbar-visible::-webkit-scrollbar-thumb {
 }
 
 
-/* ---------- Anime theme ---------- */
+/* ---------- Anime theme: power + blossom ---------- */
 html[data-theme="anime"] body {
-  background-image:
-    radial-gradient(circle at 12% 8%, rgba(216, 91, 120, 0.10) 0 2px, transparent 3px),
-    radial-gradient(circle at 82% 18%, rgba(239, 170, 184, 0.14) 0 2px, transparent 3px);
-  background-size: 34px 34px, 46px 46px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(72, 199, 255, 0.10), transparent 34%),
+    radial-gradient(circle at 85% 70%, rgba(140, 108, 255, 0.08), transparent 30%),
+    var(--bg);
 }
 
 html[data-theme="anime"] .nav {
-  background: color-mix(in srgb, #fff8f3 86%, transparent);
+  background: rgba(7, 12, 29, 0.82);
+  border-bottom-color: rgba(72, 199, 255, 0.20);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
+}
+
+html[data-theme="anime"] .brand {
+  color: var(--accent);
+  text-shadow: 0 0 16px rgba(72, 199, 255, 0.38);
 }
 
 html[data-theme="anime"] .nav__links a.active {
-  color: var(--accent);
-}
-
-html[data-theme="anime"] .nav__links a.active::after {
-  display: block;
-  height: 2px;
-  margin-top: 5px;
-  border-radius: 999px;
-  background: currentColor;
-  content: "";
+  color: var(--warm);
+  text-shadow: 0 0 14px rgba(255, 193, 90, 0.42);
 }
 
 html[data-theme="anime"] .theme-toggle {
-  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
-  background: rgba(255, 240, 244, 0.72);
+  border-color: rgba(72, 199, 255, 0.36);
+  background: rgba(16, 24, 49, 0.82);
+  color: var(--accent);
+  box-shadow: 0 0 18px rgba(72, 199, 255, 0.12);
+}
+
+html[data-theme="anime"] .hero::after,
+html[data-theme="anime"] .page-hero::after {
+  position: absolute;
+  inset: -20%;
+  z-index: 1;
+  pointer-events: none;
+  content: "";
+  background:
+    radial-gradient(circle at 50% 48%, rgba(72, 199, 255, 0.10), transparent 24%),
+    radial-gradient(circle at 50% 48%, transparent 0 22%, rgba(140, 108, 255, 0.05) 34%, transparent 50%);
+  animation: anime-aura 4s ease-in-out infinite alternate;
 }
 
 html[data-theme="anime"] .hero__overlay {
   background: var(--hero-overlay);
+}
+
+html[data-theme="anime"] .hero__quote,
+html[data-theme="anime"] .page-hero__quote {
+  color: #ffffff;
+  text-shadow: 0 0 18px rgba(72, 199, 255, 0.28);
+}
+
+html[data-theme="anime"] .hero__author,
+html[data-theme="anime"] .page-hero__author {
+  color: rgba(242, 246, 255, 0.82);
 }
 
 html[data-theme="anime"] .section-label,
@@ -1068,31 +1095,101 @@ html[data-theme="anime"] .timeline__year {
   color: var(--warm);
 }
 
-html[data-theme="anime"] .button--primary,
-html[data-theme="anime"] .filter:hover,
-html[data-theme="anime"] .filter.active {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff8f3;
+html[data-theme="anime"] .section--soft {
+  background:
+    linear-gradient(135deg, rgba(72, 199, 255, 0.045), rgba(140, 108, 255, 0.045)),
+    var(--surface-soft);
+}
+
+html[data-theme="anime"] .glass-card {
+  border-color: rgba(72, 199, 255, 0.16);
+  box-shadow:
+    0 18px 55px rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.045);
 }
 
 html[data-theme="anime"] .glass-card:hover {
-  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  border-color: rgba(72, 199, 255, 0.46);
+  box-shadow:
+    0 18px 55px rgba(0, 0, 0, 0.34),
+    0 0 28px rgba(72, 199, 255, 0.10);
 }
 
-html[data-theme="anime"] .page-hero__quote {
-  color: #8f3651;
+html[data-theme="anime"] .button--primary,
+html[data-theme="anime"] .filter:hover,
+html[data-theme="anime"] .filter.active {
+  background: linear-gradient(135deg, var(--accent), var(--anime-violet));
+  border-color: transparent;
+  color: #06101f;
+  box-shadow: 0 0 22px rgba(72, 199, 255, 0.22);
 }
 
-html[data-theme="anime"] .hero__quote {
-  color: #8f3651;
+html[data-theme="anime"] .resume-link:hover,
+html[data-theme="anime"] .text-link:hover {
+  color: var(--accent) !important;
+  text-shadow: 0 0 12px rgba(72, 199, 255, 0.28);
 }
 
-html[data-theme="anime"] .hero__author,
-html[data-theme="anime"] .page-hero__author {
-  color: rgba(255, 248, 243, 0.88);
+html[data-theme="anime"] .ask-drishay__button {
+  border-color: rgba(72, 199, 255, 0.28);
+  box-shadow: 0 0 24px rgba(72, 199, 255, 0.12), var(--shadow);
+}
+
+html[data-theme="anime"] .ask-drishay__button::before {
+  background: var(--anime-hot);
+  box-shadow: 0 0 14px rgba(255, 85, 127, 0.70);
+}
+
+html[data-theme="anime"] .cursor-glow {
+  opacity: 0.24;
+  background: radial-gradient(circle, rgba(72, 199, 255, 0.55), rgba(140, 108, 255, 0.16) 35%, transparent 70%);
+  filter: blur(20px);
 }
 
 html[data-theme="anime"] {
-  --scroll-thumb: rgba(216, 91, 120, 0.72);
+  --scroll-thumb: rgba(72, 199, 255, 0.78);
+}
+
+.anime-petals {
+  position: fixed;
+  inset: 0;
+  z-index: 130;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+html[data-theme="anime"] .anime-petals {
+  opacity: 1;
+}
+
+.anime-petal {
+  position: absolute;
+  top: -12vh;
+  left: var(--x);
+  width: var(--size);
+  height: calc(var(--size) * 0.72);
+  border-radius: 80% 20% 80% 20%;
+  background: linear-gradient(135deg, #ffd9e3, #ff7fa2);
+  box-shadow: 0 0 8px rgba(255, 127, 162, 0.22);
+  transform: rotate(var(--r));
+  animation: petal-fall var(--duration) linear var(--delay) infinite;
+}
+
+@keyframes petal-fall {
+  0% { transform: translate3d(0, -12vh, 0) rotate(var(--r)); }
+  25% { transform: translate3d(calc(var(--drift) * -0.35), 28vh, 0) rotate(calc(var(--r) + 90deg)); }
+  50% { transform: translate3d(var(--drift), 58vh, 0) rotate(calc(var(--r) + 180deg)); }
+  75% { transform: translate3d(calc(var(--drift) * -0.5), 86vh, 0) rotate(calc(var(--r) + 270deg)); }
+  100% { transform: translate3d(var(--drift), 116vh, 0) rotate(calc(var(--r) + 360deg)); }
+}
+
+@keyframes anime-aura {
+  from { transform: scale(0.96); opacity: 0.65; }
+  to { transform: scale(1.04); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anime-petals { display: none; }
 }
