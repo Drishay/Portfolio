@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     '<nav class="nav" aria-label="Primary navigation">' +
       '<div class="container nav__inner">' +
         '<div class="nav__start">' +
-          '<button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch Day/Night theme" title="Switch theme">◐</button>' +
+          '<button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to night theme" title="Switch theme"><span class="theme-icon" aria-hidden="true">☀</span></button>' +
           '<a class="brand" href="index.html">Drishay Chauhan</a>' +
         '</div>' +
 
@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
           '<a class="' + isActive("skills.html") + '" href="skills.html">Skills</a>' +
           '<a class="' + isActive("journey.html") + '" href="journey.html">Journey</a>' +
           '<a class="' + isActive("projects.html") + '" href="projects.html">Projects</a>' +
-          '<a class="' + isActive("blog.html") + '" href="blog.html">Blog</a>' +
           '<a class="resume-link" href="assets/resume/Drishay_Chauhan_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>' +
         '</div>' +
 
@@ -40,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
         '<a href="skills.html">Skills</a>' +
         '<a href="journey.html">Journey</a>' +
         '<a href="projects.html">Projects</a>' +
-        '<a href="blog.html">Blog</a>' +
         '<a href="assets/resume/Drishay_Chauhan_Resume.pdf" target="_blank">Resume</a>' +
       '</div>' +
     '</nav>';

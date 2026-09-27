@@ -21,6 +21,16 @@
     document.documentElement.dataset.theme = theme;
     localStorage.setItem(STORAGE_KEY, theme);
 
+    const themeButton = document.getElementById("themeToggle");
+    const themeIcon = themeButton?.querySelector(".theme-icon");
+
+    if (themeButton && themeIcon) {
+      const isNight = theme === "night";
+      themeIcon.textContent = isNight ? "☾" : "☀";
+      themeButton.setAttribute("aria-label", isNight ? "Switch to day theme" : "Switch to night theme");
+      themeButton.setAttribute("title", isNight ? "Switch to day theme" : "Switch to night theme");
+    }
+
     document.dispatchEvent(
       new CustomEvent("themechange", {
         detail: { theme },
