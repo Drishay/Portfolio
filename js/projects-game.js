@@ -53,8 +53,8 @@ document.addEventListener("DOMContentLoaded",()=>{
   }
 
   function getBoard(){
-    const roads=7;
-    const rows=9;
+    const roads=8;
+    const rows=10;
     return {roads,rows};
   }
 
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     ctx.setTransform(state.dpr,0,0,state.dpr,0,0);
     const board=getBoard();
     state.roadCount=board.roads;
-    state.laneHeight=Math.max(25,state.height/10);
+    state.laneHeight=Math.max(25,state.height/11);
     state.roadStart=state.laneHeight;
     buildLevel();
     draw();
@@ -88,13 +88,13 @@ document.addEventListener("DOMContentLoaded",()=>{
   function buildLevel(){
     const cfg=configForLevel();
     const board=getBoard();
-    state.roadCount=7;
+    state.roadCount=8;
     state.lanes=[];
     state.stops=[];
     state.laneHeight=Math.max(25,Math.min(42,state.height/(board.rows+2)));
     state.roadStart=state.laneHeight*2;
 
-    for(let i=0;i<7;i++){
+    for(let i=0;i<8;i++){
       const y=state.roadStart+i*state.laneHeight;
       const direction=i%2===0?1:-1;
       const baseSpeed=cfg.speed+(i%3)*7;
@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     const cfg=configForLevel();
     const stepX=Math.max(24,state.width*.052);
     const stepY=state.laneHeight;
-    const topFoot=state.roadStart;
+    const topFoot=state.laneHeight;
     const bottomFoot=state.height-state.laneHeight*.55;
 
     const targetX=Math.max(state.player.size,Math.min(state.width-state.player.size,state.player.x+dx*stepX));
@@ -289,7 +289,9 @@ document.addEventListener("DOMContentLoaded",()=>{
     if(checkCollision()){gameOver();return}
 
     const topFoot=state.laneHeight;
-    if(!p.moving&&p.y<=topFoot+state.laneHeight*.45)finishLevel();
+    const topFootEnd=topFoot+state.laneHeight;
+    const playerCenterInFinishFootpath=p.y>=topFoot&&p.y<=topFootEnd;
+    if(!p.moving&&playerCenterInFinishFootpath)finishLevel();
   }
 
   function drawBackground(){
@@ -298,7 +300,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     const buildingHeight=state.laneHeight;
     const footHeight=state.laneHeight;
     const roadTop=buildingHeight+footHeight;
-    const bottomFootY=roadTop+7*state.laneHeight;
+    const bottomFootY=roadTop+8*state.laneHeight;
 
     ctx.fillStyle=night?"#071019":"#d8e5d0";
     ctx.fillRect(0,0,state.width,state.height);
@@ -322,7 +324,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     ctx.fillRect(0,buildingHeight-2,state.width,2);
 
     // Seven roads.
-    for(let i=0;i<7;i++){
+    for(let i=0;i<8;i++){
       const lane=state.lanes[i];
       if(!lane)continue;
       ctx.fillStyle=night?(i%2?"#162a39":"#142433"):(i%2?"#69736f":"#747d78");
