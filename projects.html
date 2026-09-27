@@ -71,6 +71,26 @@
       </div>
     </div>
 
+    <button class="projects-game-info" id="projectsGameInfo" type="button" aria-label="About Cross the Road">i</button>
+
+    <div class="projects-game-info-overlay" id="projectsGameInfoOverlay" hidden>
+      <div class="projects-game-info-panel" role="dialog" aria-modal="true" aria-labelledby="projectsGameInfoTitle">
+        <button class="projects-game-info-close" id="projectsGameInfoClose" type="button" aria-label="Close game information">×</button>
+        <p class="projects-game-info-kicker">ABOUT THE GAME</p>
+        <h2 id="projectsGameInfoTitle">Cross the Road</h2>
+        <p>Choose a character, read the traffic, collect the coin, and make it safely from the bottom footpath to the top.</p>
+        <div class="projects-game-info-grid">
+          <div><strong>Controls</strong><span>WASD / Arrow Keys</span></div>
+          <div><strong>Levels</strong><span>7 levels · increasing difficulty</span></div>
+          <div><strong>Cars</strong><span>7 colors · each with its own speed</span></div>
+          <div><strong>Roads</strong><span>8 roads · middle roads are faster</span></div>
+          <div><strong>Coin</strong><span>Collect it for +10 points</span></div>
+          <div><strong>Goal</strong><span>Reach the top footpath to clear the level</span></div>
+        </div>
+        <p class="projects-game-info-note">Traffic patterns are randomized, so every run is different.</p>
+      </div>
+    </div>
+
     <div class="projects-game-controls" id="projectsGameControls" aria-label="Game controls">
       <button type="button" data-direction="up" aria-label="Move up">↑</button>
       <button type="button" data-direction="left" aria-label="Move left">←</button>
