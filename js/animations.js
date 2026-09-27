@@ -3,11 +3,6 @@
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
-  setupCursorGlow();
-  setupHeroThemeImages();
-});
-
-function setupCursorGlow() {
   const glow = document.createElement("div");
 
   glow.className = "cursor-glow";
@@ -39,38 +34,4 @@ function setupCursorGlow() {
   }
 
   animate();
-}
-
-function setupHeroThemeImages() {
-  const heroImage = document.getElementById("heroImage");
-
-  if (!heroImage) {
-    return;
-  }
-
-  const images = {
-    day: "assets/images/hero/day-01.jpg",
-    night: "assets/images/hero/night-01.jpg",
-  };
-
-  function updateHeroImage(theme) {
-    const nextImage = images[theme];
-
-    if (!nextImage || heroImage.src.endsWith(nextImage)) {
-      return;
-    }
-
-    heroImage.classList.add("is-changing");
-
-    window.setTimeout(() => {
-      heroImage.src = nextImage;
-      heroImage.onload = () => heroImage.classList.remove("is-changing");
-    }, 380);
-  }
-
-  updateHeroImage(PortfolioTheme.get());
-
-  document.addEventListener("themechange", (event) => {
-    updateHeroImage(event.detail.theme);
-  });
-}
+});
