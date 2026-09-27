@@ -97,7 +97,7 @@ body, .nav, .card, .glass-card, .button, .chips span, .facts, .footer, .page-hea
 }
 
 .brand {
-  font-size: 0.95rem;
+  font-size: 1.08rem;
   font-weight: 700;
   letter-spacing: -0.025em;
 }
@@ -107,7 +107,7 @@ body, .nav, .card, .glass-card, .button, .chips span, .facts, .footer, .page-hea
   align-items: center;
   gap: 1.25rem;
   color: var(--text-muted);
-  font-size: 0.82rem;
+  font-size: 0.94rem;
 }
 
 .nav__links a, .mobile-menu a { transition: color 180ms ease; }
@@ -748,11 +748,6 @@ html[data-theme="night"] .cursor-glow { opacity: 0.17; }
   gap: 10px;
 }
 
-html[data-theme="day"] .brand::after {
-  content: ".";
-  color: var(--warm);
-}
-
 html[data-theme="day"] .section h2,
 html[data-theme="day"] .page-header h1 {
   text-shadow: 0 1px 0 rgba(255,255,255,.7);
@@ -761,11 +756,6 @@ html[data-theme="day"] .page-header h1 {
 html[data-theme="day"] .section-label,
 html[data-theme="day"] .meta {
   color: var(--warm);
-}
-
-html[data-theme="night"] .brand::after {
-  content: ".";
-  color: var(--accent);
 }
 
 html[data-theme="night"] .section h2,
@@ -960,4 +950,41 @@ html.scrollbar-visible::-webkit-scrollbar-thumb {
 .footer__inner {
   justify-content: center;
   text-align: center;
+}
+
+/* Page card typography — quieter hierarchy without changing content */
+.skill-card h2,
+.project h2 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.55rem;
+  font-size: clamp(1.5rem, 2.35vw, 2rem);
+  line-height: 1.18;
+  letter-spacing: -0.04em;
+}
+
+.skill-card p,
+.project > p {
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.skill-card .meta,
+.project .meta {
+  font-size: 0.66rem;
+}
+
+.skill-card .badge,
+.project .badge {
+  font-size: 0.66rem;
+  padding: 0.22rem 0.46rem;
+}
+
+@media (max-width: 780px) {
+  .brand { font-size: 1rem; }
+  .nav__links { font-size: 0.9rem; }
+
+  .skill-card h2,
+  .project h2 {
+    font-size: 1.65rem;
+  }
 }
