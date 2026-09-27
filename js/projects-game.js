@@ -333,10 +333,30 @@ document.addEventListener("DOMContentLoaded",()=>{
       if(t>=1){p.x=p.targetX;p.y=p.targetY;p.moving=false;}
     }
 
-    for(const lane of state.lanes)for(const car of lane.cars){
-      car.x+=car.speed*dt;
-      if(lane.direction>0&&car.x-car.width>state.width)car.x=-car.width;
-      if(lane.direction<0&&car.x+car.width<0)car.x=state.width+car.width;
+    for(const lane of state.lanes){
+      // Cars have different maximum speeds, but they slow down when another
+      // car is directly ahead. This prevents car-to-car collisions while
+      // preserving the different color/lane difficulty.
+      const ordered=[...lane.cars].sort((a,b)=>a.x-b.x);
+      for(let index=0;index<ordered.length;index++){
+        const car=ordered[index];
+        const ahead=lane.direction>0
+          ? ordered[(index+1)%ordered.length]
+          : ordered[(index-1+ordered.length)%ordered.length];
+        let gap=lane.direction>0
+          ? ahead.x-car.x
+          : car.x-ahead.x;
+        if(gap<=0)gap+=state.width;
+
+        const safeGap=(car.width+ahead.width)*.5+12;
+        const maxDistance=Math.max(0,gap-safeGap);
+        const desiredDistance=Math.abs(car.speed)*dt;
+        const distance=Math.min(desiredDistance,maxDistance);
+        car.x+=lane.direction*distance;
+
+        if(lane.direction>0&&car.x-car.width>state.width)car.x=-car.width;
+        if(lane.direction<0&&car.x+car.width<0)car.x=state.width+car.width;
+      }
     }
 
     for(const particle of state.particles){particle.x+=particle.vx*dt;particle.y+=particle.vy*dt;particle.life-=dt}
