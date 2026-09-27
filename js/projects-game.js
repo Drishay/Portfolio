@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   }
   function resetPlayer(){
     const board=getBoard();
-    const bottomFoot=state.height-state.laneHeight*.55;
+    const bottomFoot=state.height-state.laneHeight*.5;
     state.player.size=Math.max(17,Math.min(25,state.width*.024));
     state.player.x=state.width/2;
     state.player.y=bottomFoot;
