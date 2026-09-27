@@ -503,15 +503,18 @@ dd { margin: 2px 0 0; }
 .page-header h1 { font-size: clamp(2.4rem, 5vw, 4rem); }
 
 /* Projects */
-.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+.filters { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 28px; }
 
 .filter {
-  padding: 0.45rem 0.8rem;
+  padding: 0.32rem 0.62rem;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: transparent;
   color: var(--text-muted);
   cursor: pointer;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
 }
 
@@ -991,3 +994,10 @@ html.scrollbar-visible::-webkit-scrollbar-thumb {
 
 /* Calmer secondary-page hero quotes */
 .page-hero__quote{width:min(100%,620px);margin-inline:auto;font-size:clamp(.82rem,1.35vw,.96rem);line-height:1.45;font-weight:500;letter-spacing:-.01em;opacity:.9}.page-hero__author{margin-top:.5rem;font-size:.72rem;opacity:.7}@media(max-width:780px){.page-hero__quote{width:min(100%,420px);font-size:.82rem}}
+
+
+/* Compact category filters — keeps Skills and Projects visually calm */
+@media (max-width: 780px) {
+  .filters { gap: 5px; margin-top: 20px; }
+  .filter { padding: 0.3rem 0.55rem; font-size: 0.74rem; }
+}
