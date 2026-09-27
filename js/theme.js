@@ -1,0 +1,1 @@
+(()=>{const root=document.documentElement;const saved=localStorage.getItem("drishay-theme");const initial=saved||(matchMedia("(prefers-color-scheme: dark)").matches?"night":"day");root.dataset.theme=initial;window.setTheme=(theme)=>{root.dataset.theme=theme;localStorage.setItem("drishay-theme",theme);document.dispatchEvent(new CustomEvent("themechange",{detail:theme}))}})();
