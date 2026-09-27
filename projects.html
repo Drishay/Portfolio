@@ -24,23 +24,50 @@
 
     <div class="hero__overlay"></div>
 
-    <div class="projects-game-hud" aria-live="polite">
+    <div class="projects-game-hud" id="projectsGameHud" aria-live="polite">
       <span>Score <strong id="projectsGameScore">00</strong></span>
       <span>Level <strong id="projectsGameLevel">1</strong></span>
       <span id="projectsGameState">Ready</span>
     </div>
 
     <div class="projects-game-ui">
-      <h1 class="projects-game-title">Projects</h1>
-      <p class="projects-game-subtitle">Cross the road. Dodge the bugs. Reach the build.</p>
+      <h1 class="projects-game-title">Project Crossing</h1>
+      <p class="projects-game-help">WASD / Arrow Keys</p>
       <button class="projects-game-start" id="projectsGameStart" type="button">Start Game</button>
     </div>
 
-    <div class="projects-game-overlay" id="projectsGamePause" hidden>
+    <div class="projects-game-overlay projects-game-character-select" id="projectsGameCharacterSelect" hidden>
       <div class="projects-game-panel">
-        <h2 id="projectsGamePauseTitle">Game Paused</h2>
+        <h2>Choose your character</h2>
+        <div class="projects-game-character-grid">
+          <button class="projects-game-character" type="button" data-character="chick">
+            <span class="character-preview character-preview--chick" aria-hidden="true">●</span>
+            <strong>Chick</strong>
+          </button>
+          <button class="projects-game-character" type="button" data-character="frog">
+            <span class="character-preview character-preview--frog" aria-hidden="true">●</span>
+            <strong>Frog</strong>
+          </button>
+          <button class="projects-game-character" type="button" data-character="ladybug">
+            <span class="character-preview character-preview--ladybug" aria-hidden="true">●</span>
+            <strong>Ladybug</strong>
+          </button>
+        </div>
+        <p>Reach the top footpath to clear each level.</p>
+      </div>
+    </div>
+
+    <div class="projects-game-overlay projects-game-result" id="projectsGameResult" hidden>
+      <div class="projects-game-panel">
+        <h2 id="projectsGameResultTitle">You made it!</h2>
+        <p id="projectsGameResultText">Nice run. Ready for the next challenge?</p>
+        <button id="projectsGameRestart" type="button">Restart</button>
+      </div>
+    </div>
+
+    <div class="projects-game-overlay projects-game-paused" id="projectsGamePaused" hidden>
+      <div class="projects-game-panel">
         <p id="projectsGamePauseText">Click the game area to continue.</p>
-        <button id="projectsGameRestart" type="button" hidden>Restart</button>
       </div>
     </div>
 
@@ -51,7 +78,7 @@
       <button type="button" data-direction="right" aria-label="Move right">→</button>
     </div>
 
-    <p class="projects-game-help">WASD / Arrow Keys · Click outside the hero to pause</p>
+
   </header>
 
   <div id="siteNav"></div>
