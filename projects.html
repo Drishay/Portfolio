@@ -11,23 +11,47 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/projects-game.css">
 </head>
 
 <body>
-  <header class="hero page-hero" data-page="projects" data-day="assets/images/projects/day/projects-01.svg" data-night="assets/images/projects/night/projects-01.svg">
-    <img
-      class="hero__image page-hero__image"
-      src="assets/images/projects/day/projects-01.svg"
-      alt="Projects page landscape"
-      aria-hidden="true"
-    >
+  <header class="hero page-hero projects-game-hero" id="projectsGameHero">
+    <canvas
+      id="projectsGameCanvas"
+      class="projects-game-canvas"
+      aria-label="Retro Projects hero game. Use arrow keys or WASD to move."
+    ></canvas>
+
     <div class="hero__overlay"></div>
 
-    <div class="container hero__content page-hero__content">
-      <h1>Projects</h1>
-      <p class="hero__quote page-hero__quote">Ideas become clearer when they are built.</p>
-      <p class="hero__author">— Drishay Chauhan</p>
+    <div class="projects-game-hud" aria-live="polite">
+      <span>Score <strong id="projectsGameScore">00</strong></span>
+      <span>Level <strong id="projectsGameLevel">1</strong></span>
+      <span id="projectsGameState">Ready</span>
     </div>
+
+    <div class="projects-game-ui">
+      <h1 class="projects-game-title">Projects</h1>
+      <p class="projects-game-subtitle">Cross the road. Dodge the bugs. Reach the build.</p>
+      <button class="projects-game-start" id="projectsGameStart" type="button">Start Game</button>
+    </div>
+
+    <div class="projects-game-overlay" id="projectsGamePause" hidden>
+      <div class="projects-game-panel">
+        <h2 id="projectsGamePauseTitle">Game Paused</h2>
+        <p id="projectsGamePauseText">Click the game area to continue.</p>
+        <button id="projectsGameRestart" type="button" hidden>Restart</button>
+      </div>
+    </div>
+
+    <div class="projects-game-controls" id="projectsGameControls" aria-label="Game controls">
+      <button type="button" data-direction="up" aria-label="Move up">↑</button>
+      <button type="button" data-direction="left" aria-label="Move left">←</button>
+      <button type="button" data-direction="down" aria-label="Move down">↓</button>
+      <button type="button" data-direction="right" aria-label="Move right">→</button>
+    </div>
+
+    <p class="projects-game-help">WASD / Arrow Keys · Click outside the hero to pause</p>
   </header>
 
   <div id="siteNav"></div>
@@ -265,5 +289,6 @@
   <script src="js/animations.js" defer></script>
   <script src="js/pageHero.js" defer></script>
   <script src="js/projects.js" defer></script>
+  <script src="js/projects-game.js" defer></script>
 </body>
 </html>
