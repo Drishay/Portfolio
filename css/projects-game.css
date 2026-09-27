@@ -83,26 +83,6 @@ html[data-theme="day"] .projects-game-controls button:hover{
 }
 .projects-game-info-overlay[hidden]{display:none}
 .projects-game-info-panel{
-  scrollbar-width:thin;
-  scrollbar-color:transparent transparent;
-}
-.projects-game-info-panel::-webkit-scrollbar{
-  width:8px;
-}
-.projects-game-info-panel::-webkit-scrollbar-track{
-  background:transparent;
-}
-.projects-game-info-panel::-webkit-scrollbar-thumb{
-  background:transparent;
-  border-radius:999px;
-}
-.projects-game-info-panel:hover{
-  scrollbar-color:var(--scroll-thumb) transparent;
-}
-.projects-game-info-panel:hover::-webkit-scrollbar-thumb{
-  background:var(--scroll-thumb);
-}
-
   position:relative;width:min(500px,calc(100% - 24px));max-height:calc(100% - 40px);overflow:auto;padding:26px 28px;
   border:1px solid rgba(255,255,255,.2);border-radius:18px;background:rgba(7,16,25,.9);
   color:#fff;box-shadow:0 24px 70px rgba(0,0,0,.32);backdrop-filter:blur(18px)
