@@ -45,19 +45,17 @@ document.addEventListener("DOMContentLoaded",()=>{
   function configForLevel(){
     const expanded=state.level>=5;
     return {
-      roads:expanded?10:6,
+      roads:7,
       speed:48+(state.level-1)*11,
       playerDuration:Math.max(.075,.16-(state.level-1)*.012),
-      carsPerLane:state.level>=6?3:2,
-      stopCount:expanded?2:0
+      carsPerLane:state.level>=6?3:2
     };
   }
 
   function getBoard(){
-    const expanded=state.level>=5;
-    const roads=expanded?8:6;
-    const rows=expanded?10:8;
-    return {expanded,roads,rows,topFoot:0,startRoadRow:expanded?6:6,restRow:expanded?5:-1};
+    const roads=7;
+    const rows=9;
+    return {roads,rows};
   }
 
   function resizeCanvas(){
@@ -90,22 +88,14 @@ document.addEventListener("DOMContentLoaded",()=>{
   function buildLevel(){
     const cfg=configForLevel();
     const board=getBoard();
-    state.roadCount=board.roads;
+    state.roadCount=7;
     state.lanes=[];
     state.stops=[];
     state.laneHeight=Math.max(25,Math.min(42,state.height/(board.rows+2)));
-    state.roadStart=state.laneHeight;
+    state.roadStart=state.laneHeight*2;
 
-    // Board is rendered top-to-bottom as:
-    // finish footpath → roads → [rest footpath] → roads → start footpath.
-    let row=1;
-    for(let i=0;i<board.roads;i++){
-      if(board.expanded && i===4){
-        state.stops.push({row,label:"REST"});
-        row+=1;
-      }
-
-      const y=state.roadStart+row*state.laneHeight;
+    for(let i=0;i<7;i++){
+      const y=state.roadStart+i*state.laneHeight;
       const direction=i%2===0?1:-1;
       const baseSpeed=cfg.speed+(i%3)*7;
       const cars=[];
@@ -122,8 +112,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         });
       }
 
-      state.lanes.push({y,direction,cars,row});
-      row+=1;
+      state.lanes.push({y,direction,cars,row:i+2});
     }
 
     resetPlayer();
@@ -151,6 +140,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
   function setMode(mode){
     state.mode=mode;
+    hero.classList.toggle("is-idle",mode==="idle");
     hero.classList.toggle("is-playing",mode==="playing");
     hero.classList.toggle("is-paused",mode==="paused");
     if(mode!=="paused")pausedOverlay.hidden=true;
@@ -298,73 +288,60 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     if(checkCollision()){gameOver();return}
 
-    const topFoot=state.roadStart;
+    const topFoot=state.laneHeight;
     if(!p.moving&&p.y<=topFoot+state.laneHeight*.45)finishLevel();
   }
 
   function drawBackground(){
     const night=isNight();
     const board=getBoard();
+    const buildingHeight=state.laneHeight;
+    const footHeight=state.laneHeight;
+    const roadTop=buildingHeight+footHeight;
+    const bottomFootY=roadTop+7*state.laneHeight;
 
     ctx.fillStyle=night?"#071019":"#d8e5d0";
     ctx.fillRect(0,0,state.width,state.height);
 
-    // Buildings / skyline behind the finish footpath.
-    const footHeight=state.laneHeight;
+    // Single building / skyline row.
     ctx.fillStyle=night?"#102536":"#b8d3ad";
-    ctx.fillRect(0,0,state.width,footHeight);
-
+    ctx.fillRect(0,0,state.width,buildingHeight);
     for(let x=0;x<state.width;x+=58){
       const h=18+((x*17)%28);
-      ctx.fillStyle=night?"#17344a":"#6f9270";
-      ctx.fillRect(x,footHeight-h,30,h);
+      ctx.fillStyle=night?"#17344a":"#5f7d62";
+      ctx.fillRect(x,buildingHeight-h,30,h);
       ctx.fillStyle=night?"#7da4c5":"#e9c16f";
-      ctx.fillRect(x+7,footHeight-h+8,4,4);
-      ctx.fillRect(x+18,footHeight-h+17,4,4);
+      ctx.fillRect(x+7,buildingHeight-h+8,4,4);
+      ctx.fillRect(x+18,buildingHeight-h+17,4,4);
     }
 
-    // Top finish footpath.
+    // Finish footpath.
     ctx.fillStyle=night?"#18394d":"#d5dfbd";
-    ctx.fillRect(0,0,state.width,footHeight);
+    ctx.fillRect(0,buildingHeight,state.width,footHeight);
     ctx.fillStyle=night?"#4d78a3":"#d9821b";
-    ctx.fillRect(0,footHeight-3,state.width,3);
+    ctx.fillRect(0,buildingHeight-2,state.width,2);
 
-    // Roads and the optional central resting footpath.
-    for(let row=1;row<=board.rows-1;row++){
-      const y=row*state.laneHeight;
-      const stop=state.stops.find(item=>item.row===row);
-
-      if(stop){
-        ctx.fillStyle=night?"#18394d":"#d5dfbd";
-        ctx.fillRect(0,y,state.width,state.laneHeight);
-        ctx.fillStyle=night?"rgba(125,164,197,.4)":"rgba(255,255,255,.55)";
-        for(let x=18;x<state.width;x+=48)ctx.fillRect(x,y+8,24,3);
-        ctx.fillStyle=night?"rgba(233,242,248,.42)":"rgba(23,35,45,.38)";
-        ctx.font="700 9px Manrope, sans-serif";
-        ctx.fillText("REST",10,y+state.laneHeight*.7);
-        continue;
-      }
-
-      const laneIndex=state.lanes.findIndex(lane=>lane.row===row);
-      if(laneIndex<0)continue;
-      ctx.fillStyle=night?(laneIndex%2?"#162a39":"#142433"):(laneIndex%2?"#69736f":"#747d78");
-      ctx.fillRect(0,y,state.width,state.laneHeight);
+    // Seven roads.
+    for(let i=0;i<7;i++){
+      const lane=state.lanes[i];
+      if(!lane)continue;
+      ctx.fillStyle=night?(i%2?"#162a39":"#142433"):(i%2?"#69736f":"#747d78");
+      ctx.fillRect(0,lane.y,state.width,state.laneHeight);
       ctx.strokeStyle=night?"rgba(171,205,226,.15)":"rgba(255,255,255,.25)";
       ctx.setLineDash([12,14]);
       ctx.beginPath();
-      ctx.moveTo(0,y+state.laneHeight-4);
-      ctx.lineTo(state.width,y+state.laneHeight-4);
+      ctx.moveTo(0,lane.y+state.laneHeight-4);
+      ctx.lineTo(state.width,lane.y+state.laneHeight-4);
       ctx.stroke();
       ctx.setLineDash([]);
     }
 
-    // Bottom starting footpath.
-    const bottomY=state.height-footHeight;
+    // Start footpath.
     ctx.fillStyle=night?"#18394d":"#d5dfbd";
-    ctx.fillRect(0,bottomY,state.width,footHeight);
-    ctx.fillStyle=night?"rgba(125,164,197,.4)":"rgba(23,35,45,.22)";
+    ctx.fillRect(0,bottomFootY,state.width,footHeight);
+    ctx.fillStyle=night?"rgba(125,164,197,.45)":"rgba(23,35,45,.24)";
     ctx.font="700 9px Manrope, sans-serif";
-    ctx.fillText("START",10,bottomY+footHeight*.68);
+    ctx.fillText("START",10,bottomFootY+footHeight*.68);
   }
   function drawCars(){
     state.lanes.forEach((lane,laneIndex)=>lane.cars.forEach((car,carIndex)=>{
