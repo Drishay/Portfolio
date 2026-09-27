@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drishay Chauhan | Portfolio</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bg: "#0f172a",
+                        surface: "#111827",
+                        accent: "#38bdf8"
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="bg-bg text-gray-200">
+
+    <!-- HERO / COVER -->
+    <section id="hero" class="relative h-[25vh] w-full overflow-hidden">
+        <img id="heroImage" src="assets/images/hero1.jpg"
+            class="absolute inset-0 w-full h-full object-cover transition-opacity duration-[2000ms]" />
+
+        <div class="absolute inset-0 bg-black/60"></div>
+
+        <div id="heroContent" class="relative z-10 flex flex-col items-center justify-center text-center h-full">
+            <p id="heroQuote" class="text-base md:text-lg text-gray-300 italic transition-opacity duration-[2000ms]">
+                Building things with clarity and purpose.
+            </p>
+
+            <p id="heroAuthor" class="mt-2 text-xs md:text-sm text-gray-400 transition-opacity duration-[2000ms]">
+                - Drishay Chauhan
+            </p>
+        </div>
+    </section>
+
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50 bg-bg/90 backdrop-blur border-b border-white/10">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+
+            <!-- LOGO -->
+            <a href="index.html" class="font-semibold text-lg">Drishay Chauhan</a>
+
+            <!-- DESKTOP MENU -->
+            <div class="hidden md:flex items-center space-x-6 text-sm">
+                <a href="#about" class="hover:text-accent">Home</a>
+                <a href="skills.html" class="hover:text-accent">Skills</a>
+                <a href="journey.html" class="hover:text-accent">Journey</a>
+                <a href="projects.html" class="hover:text-accent">Projects</a>
+                <a href="blog.html" class="hover:text-accent">Blog</a>
+                <a href="assets/resume/Drishay_Chauhan_Resume.pdf" target="_blank"
+                    class="text-sm px-4 py-2 rounded-md border border-white/20 hover:border-accent hover:text-accent transition">
+                    Resume
+                </a>
+            </div>
+
+            <!-- MOBILE MENU BUTTON -->
+            <button id="menuBtn" class="md:hidden focus:outline-none" aria-label="Toggle menu">
+                <svg class="w-6 h-6 text-gray-200" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- MOBILE MENU -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-white/10 bg-bg">
+            <div class="px-6 py-4 space-y-4 text-sm">
+                <a href="index.html" class="block hover:text-accent">Home</a>
+                <a href="skills.html" class="block hover:text-accent">Skills</a>
+                <a href="journey.html" class="block hover:text-accent">Journey</a>
+                <a href="projects.html" class="block hover:text-accent">Projects</a>
+                <a href="blog.html" class="block hover:text-accent">Blog</a>
+
+                <a href="assets/resume/Drishay_Chauhan_Resume.pdf" target="_blank"
+                    class="inline-block text-sm px-4 py-2 rounded-md border border-white/20 hover:border-accent hover:text-accent transition">
+                    Resume
+                </a>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+    <!-- ABOUT -->
+    <section id="about" class="max-w-6xl mx-auto px-6 py-20">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+
+            <!-- TEXT -->
+            <div>
+                <h2 class="text-2xl font-semibold mb-6">About Me</h2>
+                <p class="text-gray-400 leading-relaxed text-sm">
+                    I am a Computer Science undergraduate focused on building reliable software,
+                    understanding system fundamentals, and improving product quality through
+                    structured testing and development. I enjoy turning ideas into working systems
+                    while continuously strengthening my engineering foundations.
+                </p>
+            </div>
+
+            <!-- IMAGE -->
+            <div class="flex justify-center md:justify-end">
+                <img src="assets/images/profile.png" alt="Drishay Chauhan"
+                    class="w-64 h-64 object-cover rounded-full border border-white/10" />
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- SKILLS -->
+    <section id="skills" class="py-20">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-semibold">Core Skills</h2>
+                <a href="skills.html" class="text-sm text-accent hover:underline">
+                    View all skills
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 text-sm text-gray-400">
+                <div>
+                    <h3 class="text-accent mb-2">Programming</h3>
+                    <p>C/C++, Java, Python, JavaScript</p>
+                </div>
+
+                <div>
+                    <h3 class="text-accent mb-2">Web Development</h3>
+                    <p>HTML, CSS, Tailwind, React</p>
+                </div>
+
+                <div>
+                    <h3 class="text-accent mb-2">Foundations</h3>
+                    <p>DSA, OOP, SDLC, Debugging</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FEATURED PROJECTS -->
+    <section id="projects" class="max-w-6xl mx-auto px-6 py-20">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-2xl font-semibold">Featured Projects</h2>
+            <a href="projects.html" class="text-sm text-accent hover:underline">
+                View all projects
+            </a>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+
+            <!-- Project 1 -->
+            <div class="bg-surface p-6 rounded-xl border border-white/10 card-hover">
+                <h3 class="font-medium mb-2">Tic-Tac-Toe</h3>
+                <p class="text-gray-400 text-sm mb-4">
+                    A browser-based game implementing core game logic and UI interactions.
+                </p>
+                <p class="text-xs text-gray-500 mb-4">HTML • CSS • JavaScript</p>
+                <a href="projects.html" class="text-accent text-sm hover:underline">
+                    View project
+                </a>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="bg-surface p-6 rounded-xl border border-white/10 card-hover">
+                <h3 class="font-medium mb-2">TradeSense</h3>
+                <p class="text-gray-400 text-sm mb-4">
+                    A Python-based analytical tool that evaluates trade setups using strategy logic.
+                </p>
+                <p class="text-xs text-gray-500 mb-4">Python</p>
+                <a href="projects.html" class="text-accent text-sm hover:underline">
+                    View project
+                </a>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="bg-surface p-6 rounded-xl border border-white/10 card-hover">
+                <h3 class="font-medium mb-2">Cube Runner</h3>
+                <p class="text-gray-400 text-sm mb-4">
+                    A 3D runner game built to understand gameplay logic and system flow.
+                </p>
+                <p class="text-xs text-gray-500 mb-4">Unity • C#</p>
+                <a href="projects.html" class="text-accent text-sm hover:underline">
+                    View project
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- JOURNEY -->
+    <section id="experience" class="bg-surface py-20">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-semibold">What I'm Doing Now</h2>
+                <a href="journey.html" class="text-sm text-accent hover:underline">
+                    View journey
+                </a>
+            </div>
+
+            <div class="space-y-6 max-w-3xl text-sm text-gray-400">
+                <div>
+                    <h3 class="text-gray-200 font-medium">Strengthening DSA & CS Fundamentals</h3>
+                    <p>Consistent practice with problem-solving and core subjects.</p>
+                </div>
+                <div>
+                    <h3 class="text-gray-200 font-medium">Manual Tester - Blockchain Startup</h3>
+                    <p>Testing web apps, debugging issues, and collaborating with developers.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-gray-200 font-medium">Building Web & System Projects</h3>
+                    <p>Focused on clean structure, logic, and production-ready code.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="personal" class="bg-surface py-20">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-2xl font-semibold mb-6">Beyond Code</h2>
+
+            <p class="text-gray-400 max-w-3xl text-sm leading-relaxed">
+                Outside of development, I enjoy reading, regular gym training, long walks,
+                meditation, and exploring ideas through thoughtful conversations.
+                These activities help me stay disciplined, focused, and balanced.
+            </p>
+        </div>
+    </section>
+
+    <section id="resume" class="py-20">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="bg-surface border border-white/10 rounded-2xl p-10 text-center">
+
+                <h2 class="text-2xl font-semibold mb-4">
+                    Interested in Working Together?
+                </h2>
+
+                <p class="text-gray-400 max-w-2xl mx-auto mb-8 text-sm">
+                    I'm actively building projects, strengthening my fundamentals,
+                    and looking for opportunities to grow as a software engineer.
+                    You can learn more about my background through my resume.
+                </p>
+
+                <div class="flex justify-center gap-6 flex-wrap">
+                    <a href="assets/resume/Drishay_Chauhan_Resume.pdf" target="_blank"
+                        class="px-6 py-3 rounded-lg bg-accent text-bg font-medium hover:opacity-90 transition">
+                        View Resume
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/drishaychauhan"
+                        class="px-6 py-3 rounded-lg border border-white/20 text-gray-200 hover:border-accent hover:text-accent transition">
+                        Contact Me
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 py-10">
+        <div
+            class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+            <p>© 2026 Drishay Chauhan</p>
+            <div class="space-x-6 mt-4 md:mt-0">
+                <a href="https://github.com/Drishay" class="hover:text-accent">GitHub</a>
+                <a href="https://www.linkedin.com/in/drishaychauhan" class="hover:text-accent">LinkedIn</a>
+                <a href="mailto:drishaychauhan3357@gmail.com" class="hover:text-accent">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

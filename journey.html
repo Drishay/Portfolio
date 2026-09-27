@@ -1,162 +1,135 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Journey | Drishay Chauhan</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The learning and professional journey of Drishay Chauhan.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <title>Journey | Drishay Chauhan</title>
 
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        bg: "#0f172a",
-                        surface: "#111827",
-                        accent: "#38bdf8"
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body class="bg-bg text-gray-200">
+<body>
+  <header class="hero page-hero" data-page="journey" data-day="assets/images/journey/day/journey-01.svg,assets/images/journey/day/journey-02.svg,assets/images/journey/day/journey-03.svg,assets/images/journey/day/journey-04.svg" data-night="assets/images/journey/night/journey-01.svg,assets/images/journey/night/journey-02.svg,assets/images/journey/night/journey-03.svg,assets/images/journey/night/journey-04.svg" data-quotes="Learn, build, reflect, and keep moving.|Every step adds to the journey.|Progress comes from consistent work.|Keep moving with purpose.">
+    <img
+      class="hero__image page-hero__image"
+      src="assets/images/journey/day/journey-01.svg"
+      alt="Journey page landscape"
+      aria-hidden="true"
+    >
+    <div class="hero__overlay"></div>
 
-    <!-- NAVBAR -->
-    <nav class="sticky top-0 z-50 bg-bg/90 backdrop-blur border-b border-white/10">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="container hero__content page-hero__content">
+      <p class="hero__quote page-hero__quote">Learn, build, reflect, and keep moving.</p>
+      <p class="hero__author">— Drishay Chauhan</p>
+    </div>
+  </header>
 
-            <!-- LOGO -->
-            <a href="index.html" class="font-semibold text-lg">Drishay Chauhan</a>
+  <div id="siteNav"></div>
 
-            <!-- DESKTOP MENU -->
-            <div class="hidden md:flex items-center space-x-6 text-sm">
-                <a href="index.html" class="hover:text-accent">Home</a>
-                <a href="skills.html" class="hover:text-accent">Skills</a>
-                <a href="journey.html" class="hover:text-accent">Journey</a>
-                <a href="projects.html" class="hover:text-accent">Projects</a>
-                <a href="blog.html" class="hover:text-accent">Blog</a>
-                <a href="assets/resume/Drishay_Chauhan_Resume.pdf" target="_blank"
-                    class="text-sm px-4 py-2 rounded-md border border-white/20 hover:border-accent hover:text-accent transition">
-                    Resume
-                </a>
-            </div>
+  <main>
 
-            <!-- MOBILE MENU BUTTON -->
-            <button id="menuBtn" class="md:hidden focus:outline-none" aria-label="Toggle menu">
-                <svg class="w-6 h-6 text-gray-200" fill="none" stroke="currentColor" stroke-width="2"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
-        </div>
+    <section class="section">
+      <div class="container timeline">
 
-        <!-- MOBILE MENU -->
-        <div id="mobileMenu" class="hidden md:hidden border-t border-white/10 bg-bg">
-            <div class="px-6 py-4 space-y-4 text-sm">
-                <a href="index.html" class="block hover:text-accent">Home</a>
-                <a href="skills.html" class="block hover:text-accent">Skills</a>
-                <a href="journey.html" class="block hover:text-accent">Journey</a>
-                <a href="projects.html" class="block hover:text-accent">Projects</a>
-                <a href="blog.html" class="block hover:text-accent">Blog</a>
+        <article class="timeline__item">
+          <span class="timeline__year">2023–Present</span>
+          <h2>B.Tech — Computer Science & Engineering</h2>
+          <p>
+            Noida Institute of Engineering and Technology, Greater Noida ·
+            CGPA 8.34.
+          </p>
+          <p>
+            <strong>Learned:</strong>
+            programming foundations, databases, software development,
+            problem solving and computer science fundamentals.
+          </p>
+        </article>
 
-                <a href="assets/resume/Drishay_Chauhan_Resume.pdf" target="_blank"
-                    class="inline-block text-sm px-4 py-2 rounded-md border border-white/20 hover:border-accent hover:text-accent transition">
-                    Resume
-                </a>
-            </div>
-        </div>
-    </nav>
+        <article class="timeline__item">
+          <span class="timeline__year">2023</span>
+          <h2>Academic / Python / SQL Projects</h2>
+          <p>
+            Built a Plant Nursery Management System for the Class XII
+            Computer Science board practical using Python and SQL.
+          </p>
+          <p>
+            <strong>Learned:</strong>
+            database connectivity, logic development, teamwork and working
+            under academic deadlines.
+          </p>
+        </article>
 
+        <article class="timeline__item">
+          <span class="timeline__year">2023–2024</span>
+          <h2>Game Development</h2>
+          <p>
+            Built Cube Runner and Plane Shooter independently with Unity
+            and C#.
+          </p>
+          <p>
+            <strong>Learned:</strong>
+            game logic, UI/UX, iteration, debugging, time management
+            and independent learning.
+          </p>
+        </article>
 
-    <!-- HEADER -->
-    <header class="max-w-6xl mx-auto px-6 py-16">
-        <h1 class="text-3xl font-semibold mb-4">My Journey</h1>
-        <p class="text-gray-400 max-w-2xl">
-            A chronological overview of my academic, technical, and practical growth
-            as a computer science student and aspiring software engineer.
-        </p>
-    </header>
+        <article class="timeline__item">
+          <span class="timeline__year">2025</span>
+          <h2>Software Testing Internship — DEHIX</h2>
+          <p>
+            Tested 10+ web application modules across desktop and mobile,
+            designed 25+ scenarios and tracked 25+ defects.
+          </p>
+          <p>
+            <strong>Learned:</strong>
+            functional testing, UI/responsive/cross-browser testing,
+            regression, SDLC/STLC and developer collaboration.
+          </p>
+        </article>
 
-    <!-- TIMELINE -->
-    <section class="max-w-6xl mx-auto px-6 pb-20">
-        <div class="timeline max-w-3xl">
+        <article class="timeline__item">
+          <span class="timeline__year">2026</span>
+          <h2>Cyber Security Project-Based Intern — HCLTech</h2>
+          <p>
+            Collaborated in a five-member team on a Python-based Network
+            Intrusion Detection System with packet capture, detection,
+            alerts, logging and analysis.
+          </p>
+          <p>
+            <strong>Learned:</strong>
+            Scapy, Wireshark, Nmap, network traffic analysis,
+            modular development and validation.
+          </p>
+        </article>
 
-            <div class="timeline-item">
-                <span class="timeline-dot"></span>
-                <h3 class="font-medium text-gray-200">B.Tech in Computer Science</h3>
-                <p class="text-xs text-gray-500 mb-2">2023 - Present</p>
-                <p class="text-gray-400 text-sm">
-                    Started formal education in computer science, focusing on programming,
-                    core subjects, and problem-solving fundamentals.
-                </p>
-            </div>
+        <article class="timeline__item">
+          <span class="timeline__year">Now</span>
+          <h2>Current Focus</h2>
+          <p>
+            Strengthening DSA and CS fundamentals, building software and
+            analytics projects, exploring GenAI/RAG/APIs, and preparing
+            for software engineering roles.
+          </p>
+        </article>
 
-            <div class="timeline-item">
-                <span class="timeline-dot"></span>
-                <h3 class="font-medium text-gray-200">Academic & Python-SQL Projects</h3>
-                <p class="text-xs text-gray-500 mb-2">2023</p>
-                <p class="text-gray-400 text-sm">
-                    Built early academic projects involving Python logic and SQL databases,
-                    learning how data, structure, and logic interact.
-                </p>
-            </div>
-
-            <div class="timeline-item">
-                <span class="timeline-dot"></span>
-                <h3 class="font-medium text-gray-200">Game Development Phase</h3>
-                <p class="text-xs text-gray-500 mb-2">2023 - 2024</p>
-                <p class="text-gray-400 text-sm">
-                    Explored Unity and C# through multiple games, improving debugging,
-                    system thinking, and iterative development.
-                </p>
-            </div>
-
-            <div class="timeline-item">
-                <span class="timeline-dot"></span>
-                <h3 class="font-medium text-gray-200">Blockchain Startup - Manual Tester</h3>
-                <p class="text-xs text-gray-500 mb-2">2025</p>
-                <p class="text-gray-400 text-sm">
-                    Worked on testing web applications, reporting bugs, improving UI quality,
-                    and collaborating with developers in an agile environment.
-                </p>
-            </div>
-
-            <div class="timeline-item">
-                <span class="timeline-dot"></span>
-                <h3 class="font-medium text-gray-200">Current Focus</h3>
-                <p class="text-xs text-gray-500 mb-2">Present</p>
-                <p class="text-gray-400 text-sm">
-                    Strengthening DSA, software fundamentals, and building clean,
-                    production-ready projects.
-                </p>
-            </div>
-
-        </div>
+      </div>
     </section>
+  </main>
 
-   <!-- FOOTER -->
-    <footer class="border-t border-white/10 py-10">
-        <div
-            class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-            <p>© 2026 Drishay Chauhan</p>
-            <div class="space-x-6 mt-4 md:mt-0">
-                <a href="https://github.com/Drishay" class="hover:text-accent">GitHub</a>
-                <a href="https://www.linkedin.com/in/drishaychauhan" class="hover:text-accent">LinkedIn</a>
-                <a href="mailto:drishaychauhan3357@gmail.com" class="hover:text-accent">Email</a>
-            </div>
-        </div>
-    </footer>
+  <div id="askDrishay" class="ask-drishay"></div>
 
+  <div id="siteFooter"></div>
+
+  <script src="js/theme.js" defer></script>
+  <script src="js/navigation.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/chatbot.js" defer></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/pageHero.js" defer></script>
 </body>
-
 </html>

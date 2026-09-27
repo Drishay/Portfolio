@@ -1,102 +1,61 @@
+/* =========================================================
+   Shared Footer
+   ========================================================= */
 
-const menuBtn = document.getElementById("menuBtn");
-const mobileMenu = document.getElementById("mobileMenu");
+document.addEventListener("DOMContentLoaded", () => {
+  const footer = document.getElementById("siteFooter");
 
-menuBtn.addEventListener("click", () => {
-  mobileMenu.classList.toggle("hidden");
-});
-
-/* Close menu when a link is clicked */
-mobileMenu.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
-    mobileMenu.classList.add("hidden");
-  });
-});
-
-const heroData = [
-  {
-    image: "assets/images/hero1.jpg",
-    quote: "Building things with clarity and purpose.",
-    author: "Drishay Chauhan"
-  },
-  {
-    image: "assets/images/hero2.jpg",
-    quote: "Learning by building, improving by reflecting.",
-    author: "Drishay Chauhan"
+  if (!footer) {
+    return;
   }
-];
 
-let heroIndex = 0;
-let heroTimeout;
+  footer.innerHTML =
+    '<footer class="footer">' +
+      '<div class="container footer__inner">' +
+        '<span>Drishay Chauhan © 2026</span>' +
+      '</div>' +
+    '</footer>';
+});
 
-const heroImage = document.getElementById("heroImage");
-const heroQuote = document.getElementById("heroQuote");
-const heroAuthor = document.getElementById("heroAuthor");
-const heroContent = document.getElementById("heroContent");
 
-/* TIMING */
-const DISPLAY_TIME = 7000; // fully visible
-const FADE_TIME = 2000;    // fade duration
+/* =========================================================
+   Edge-hover scrollbar
+   The scrollbar stays quiet until the pointer reaches
+   the right edge of the viewport.
+   ========================================================= */
+document.addEventListener("mousemove", (event) => {
+  const edgeDistance = 18;
+  document.documentElement.classList.toggle(
+    "scrollbar-visible",
+    event.clientX >= window.innerWidth - edgeDistance
+  );
+});
 
-/* Force initial state */
-function setVisible(visible) {
-  const opacity = visible ? "1" : "0";
-  heroImage.style.opacity = opacity;
-  heroQuote.style.opacity = opacity;
-  heroAuthor.style.opacity = opacity;
-}
+document.addEventListener("mouseleave", () => {
+  document.documentElement.classList.remove("scrollbar-visible");
+});
 
-/* Set content ONLY when invisible */
-function setContent(index) {
-  heroImage.src = heroData[index].image;
-  heroQuote.textContent = heroData[index].quote;
-  heroAuthor.textContent = `— ${heroData[index].author}`;
-}
+/* =========================================================
+   Anime mode atmosphere — falling blossom petals
+   ========================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+  if (document.querySelector(".anime-petals")) return;
 
-/* Main loop */
-function runHeroCycle() {
-  // 1️⃣ Stay visible
-  heroTimeout = setTimeout(() => {
+  const layer = document.createElement("div");
+  layer.className = "anime-petals";
+  layer.setAttribute("aria-hidden", "true");
 
-    // 2️⃣ Fade OUT everything together
-    setVisible(false);
+  for (let i = 0; i < 22; i += 1) {
+    const petal = document.createElement("span");
+    petal.className = "anime-petal";
+    petal.style.setProperty("--x", `${Math.random() * 100}%`);
+    petal.style.setProperty("--size", `${7 + Math.random() * 9}px`);
+    petal.style.setProperty("--duration", `${8 + Math.random() * 9}s`);
+    petal.style.setProperty("--delay", `${-Math.random() * 14}s`);
+    petal.style.setProperty("--drift", `${-90 + Math.random() * 180}px`);
+    petal.style.setProperty("--r", `${Math.random() * 360}deg`);
+    layer.appendChild(petal);
+  }
 
-    // 3️⃣ After fade-out finishes
-    heroTimeout = setTimeout(() => {
-      heroIndex = (heroIndex + 1) % heroData.length;
-
-      // change content while invisible
-      setContent(heroIndex);
-
-      // force browser to register opacity=0 before fading in
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          // 4️⃣ Fade IN everything together
-          setVisible(true);
-
-          // 5️⃣ Wait again
-          runHeroCycle();
-        });
-      });
-
-    }, FADE_TIME);
-
-  }, DISPLAY_TIME);
-}
-
-/* INIT — show immediately */
-setContent(heroIndex);
-setVisible(true);
-runHeroCycle();
-
-/* Pause on hover */
-if (heroContent) {
-  heroContent.addEventListener("mouseenter", () => {
-    clearTimeout(heroTimeout);
-  });
-
-  heroContent.addEventListener("mouseleave", () => {
-    runHeroCycle();
-  });
-}
-
+  document.body.appendChild(layer);
+});
