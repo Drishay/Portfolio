@@ -29,7 +29,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     mode:"idle", level:1, score:0, character:"chick", lastTime:0, animationId:0,
     width:900,height:500,dpr:1,laneHeight:40,roadStart:110,roadCount:6,
     player:{x:0,y:0,size:22,targetX:0,targetY:0,moving:false,moveT:0,moveDuration:.14},
-    lanes:[],stops:[],particles:[],roadsCrossed:0
+    lanes:[],stops:[],particles:[],roadsCrossed:0,
+    coin:{x:0,y:0,radius:7,active:false}
   };
 
   const characterData={
@@ -38,6 +39,15 @@ document.addEventListener("DOMContentLoaded",()=>{
     ladybug:{body:"#d94c45",accent:"#17232d",eye:"#17232d"}
   };
   const carColors=["#d9821b","#3f7fb5","#d94c45","#6e9c55","#8d63b5","#d2a33d","#4f9a9a"];
+  const carSpeedByColor={
+    "#d9821b":1.00,
+    "#3f7fb5":1.12,
+    "#d94c45":1.20,
+    "#6e9c55":.94,
+    "#8d63b5":1.28,
+    "#d2a33d":1.08,
+    "#4f9a9a":1.16
+  };
   const keys=new Set();
 
   const isNight=()=>document.documentElement.dataset.theme==="night";
@@ -85,13 +95,26 @@ document.addEventListener("DOMContentLoaded",()=>{
     state.player.moveT=0;
     state.player.moveDuration=configForLevel().playerDuration;
   }
+  function spawnCoin(){
+    const laneIndex=2+Math.floor(Math.random()*4); // Roads 3–6: central/high-risk area.
+    const lane=state.lanes[laneIndex];
+    if(!lane){
+      state.coin.active=false;
+      return;
+    }
+    state.coin.radius=Math.max(5,Math.min(8,state.laneHeight*.18));
+    state.coin.x=state.width*(0.42+Math.random()*.16);
+    state.coin.y=lane.y+state.laneHeight*.5;
+    state.coin.active=true;
+  }
+
   function buildLevel(){
     const cfg=configForLevel();
     const board=getBoard();
     state.roadCount=8;
     state.lanes=[];
     state.stops=[];
-    state.laneHeight=Math.max(25,Math.min(42,state.height/(board.rows+2)));
+    state.laneHeight=Math.max(25,state.height/11);
     state.roadStart=state.laneHeight*2;
 
     for(let i=0;i<8;i++){
@@ -102,13 +125,16 @@ document.addEventListener("DOMContentLoaded",()=>{
 
       for(let j=0;j<cfg.carsPerLane;j++){
         const gap=state.width/cfg.carsPerLane;
+        const color=carColors[(i+j+state.level)%carColors.length];
+        const colorMultiplier=carSpeedByColor[color]||1;
+        const laneMultiplier=(i>=2&&i<=5)?1.22:0.92;
         cars.push({
           x:(j*gap+(i*71))%state.width,
           y:y+state.laneHeight*.19,
           width:42+(i%3)*8,
           height:state.laneHeight*.58,
-          speed:baseSpeed*direction*(.88+(j%2)*.12),
-          color:carColors[(i+j+state.level)%carColors.length]
+          speed:baseSpeed*colorMultiplier*laneMultiplier*direction*(.88+(j%2)*.12),
+          color
         });
       }
 
@@ -116,6 +142,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     }
 
     resetPlayer();
+    spawnCoin();
   }
   function resetGame(){
     state.level=1;
@@ -257,6 +284,20 @@ document.addEventListener("DOMContentLoaded",()=>{
     resultOverlay.hidden=false;
   }
 
+  function checkCoin(){
+    if(!state.coin.active)return false;
+    const dx=state.player.x-state.coin.x;
+    const dy=state.player.y-state.coin.y;
+    const reach=state.player.size*.42+state.coin.radius;
+    if(dx*dx+dy*dy<=reach*reach){
+      state.score+=10;
+      state.coin.active=false;
+      spawnParticles();
+      return true;
+    }
+    return false;
+  }
+
   function checkCollision(){
     const p={left:state.player.x-state.player.size*.42,right:state.player.x+state.player.size*.42,top:state.player.y-state.player.size*.42,bottom:state.player.y+state.player.size*.42};
     for(const lane of state.lanes)for(const car of lane.cars){
@@ -287,6 +328,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     state.particles=state.particles.filter(particle=>particle.life>0);
 
     if(checkCollision()){gameOver();return}
+    checkCoin();
 
     const topFoot=state.laneHeight;
     const topFootEnd=topFoot+state.laneHeight;
@@ -357,6 +399,22 @@ document.addEventListener("DOMContentLoaded",()=>{
     }));
   }
 
+  function drawCoin(){
+    if(!state.coin.active)return;
+    const {x,y,radius}=state.coin;
+    ctx.save();
+    ctx.fillStyle="#d7a72f";
+    ctx.beginPath();
+    ctx.arc(x,y,radius,0,Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle="#f7d66a";
+    ctx.fillRect(x-radius*.2,y-radius*.65,Math.max(2,radius*.28),Math.max(3,radius*.7));
+    ctx.strokeStyle="rgba(255,245,180,.8)";
+    ctx.lineWidth=1;
+    ctx.stroke();
+    ctx.restore();
+  }
+
   function drawPlayer(){
     const s=state.player.size,x=state.player.x,y=state.player.y,c=characterData[state.character];
     ctx.fillStyle="rgba(0,0,0,.2)";
@@ -384,7 +442,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     ctx.globalAlpha=1;
   }
 
-  function draw(){drawBackground();drawCars();drawPlayer();drawParticles()}
+  function draw(){drawBackground();drawCars();drawCoin();drawPlayer();drawParticles()}
 
   function loop(time){
     if(state.mode!=="playing")return;
