@@ -11,23 +11,94 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/projects-game.css">
 </head>
 
 <body>
-  <header class="hero page-hero" data-page="projects" data-day="assets/images/projects/day/projects-01.svg" data-night="assets/images/projects/night/projects-01.svg">
-    <img
-      class="hero__image page-hero__image"
-      src="assets/images/projects/day/projects-01.svg"
-      alt="Projects page landscape"
-      aria-hidden="true"
-    >
+  <header class="hero page-hero projects-game-hero" id="projectsGameHero">
+    <canvas
+      id="projectsGameCanvas"
+      class="projects-game-canvas"
+      aria-label="Cross the Road game. Choose a character, then use arrow keys or WASD to cross the roads."
+    ></canvas>
+
     <div class="hero__overlay"></div>
 
-    <div class="container hero__content page-hero__content">
-      <h1>Projects</h1>
-      <p class="hero__quote page-hero__quote">Ideas become clearer when they are built.</p>
-      <p class="hero__author">— Drishay Chauhan</p>
+    <div class="projects-game-hud" id="projectsGameHud" aria-live="polite">
+      <span>Score <strong id="projectsGameScore">00</strong></span>
+      <span>Level <strong id="projectsGameLevel">1</strong></span>
+      <span id="projectsGameState">Ready</span>
     </div>
+
+    <div class="projects-game-ui">
+      <h1 class="projects-game-title">Cross the Road</h1>
+      <button class="projects-game-start" id="projectsGameStart" type="button">Start Game</button>
+      <p class="projects-game-help">Controls: WASD / Arrow Keys</p>
+    </div>
+
+    <div class="projects-game-overlay projects-game-character-select" id="projectsGameCharacterSelect" hidden>
+      <div class="projects-game-panel">
+        <h2>Choose your character</h2>
+        <div class="projects-game-character-grid">
+          <button class="projects-game-character" type="button" data-character="chick">
+            <span class="character-preview character-preview--chick" aria-hidden="true">●</span>
+            <strong>Chick</strong>
+          </button>
+          <button class="projects-game-character" type="button" data-character="frog">
+            <span class="character-preview character-preview--frog" aria-hidden="true">●</span>
+            <strong>Frog</strong>
+          </button>
+          <button class="projects-game-character" type="button" data-character="ladybug">
+            <span class="character-preview character-preview--ladybug" aria-hidden="true">●</span>
+            <strong>Ladybug</strong>
+          </button>
+        </div>
+        <p>Reach the top footpath to clear each level.</p>
+      </div>
+    </div>
+
+    <div class="projects-game-overlay projects-game-result" id="projectsGameResult" hidden>
+      <div class="projects-game-panel">
+        <h2 id="projectsGameResultTitle">You made it!</h2>
+        <p id="projectsGameResultText">Nice run. Ready for the next challenge?</p>
+        <button id="projectsGameRestart" type="button">Restart</button>
+      </div>
+    </div>
+
+    <div class="projects-game-overlay projects-game-paused" id="projectsGamePaused" hidden>
+      <div class="projects-game-panel">
+        <p id="projectsGamePauseText">Click the game area to continue.</p>
+      </div>
+    </div>
+
+    <button class="projects-game-info" id="projectsGameInfo" type="button" aria-label="About Cross the Road">i</button>
+
+    <div class="projects-game-info-overlay" id="projectsGameInfoOverlay" hidden>
+      <div class="projects-game-info-panel" role="dialog" aria-modal="true" aria-labelledby="projectsGameInfoTitle">
+        <button class="projects-game-info-close" id="projectsGameInfoClose" type="button" aria-label="Close game information">×</button>
+        <p class="projects-game-info-kicker">ABOUT THE GAME</p>
+        <h2 id="projectsGameInfoTitle">Cross the Road</h2>
+        <p>Choose a character, read the traffic, collect the coin, and make it safely from the bottom footpath to the top.</p>
+        <div class="projects-game-info-grid">
+          <div><strong>Controls</strong><span>WASD / Arrow Keys</span></div>
+          <div><strong>Levels</strong><span>7 levels · increasing difficulty</span></div>
+          <div><strong>Cars</strong><span>7 colors · each with its own speed</span></div>
+          <div><strong>Roads</strong><span>8 roads · middle roads are faster</span></div>
+          <div><strong>Coin</strong><span>Collect it for +10 points</span></div>
+          <div><strong>Goal</strong><span>Reach the top footpath to clear the level</span></div>
+        </div>
+        <p class="projects-game-info-note">Traffic patterns are randomized, so every run is different.</p>
+      </div>
+    </div>
+
+    <div class="projects-game-controls" id="projectsGameControls" aria-label="Game controls">
+      <button type="button" data-direction="up" aria-label="Move up">↑</button>
+      <button type="button" data-direction="left" aria-label="Move left">←</button>
+      <button type="button" data-direction="down" aria-label="Move down">↓</button>
+      <button type="button" data-direction="right" aria-label="Move right">→</button>
+    </div>
+
+
   </header>
 
   <div id="siteNav"></div>
@@ -265,5 +336,6 @@
   <script src="js/animations.js" defer></script>
   <script src="js/pageHero.js" defer></script>
   <script src="js/projects.js" defer></script>
+  <script src="js/projects-game.js" defer></script>
 </body>
 </html>

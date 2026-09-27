@@ -1,0 +1,158 @@
+/* =========================================================
+   Projects Hero Game
+   Self-contained styling for the Projects page mini-game.
+   ========================================================= */
+
+.projects-game-hero{position:relative;isolation:isolate;overflow:hidden;background:#071019}
+.projects-game-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:default;image-rendering:pixelated}
+.projects-game-hero .hero__overlay{z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(3,10,17,.14),rgba(3,10,17,.48)),radial-gradient(circle at center,transparent 15%,rgba(3,10,17,.22) 100%)}
+
+.projects-game-ui{position:relative;z-index:3;width:min(100% - 40px,900px);margin-inline:auto;text-align:center;color:#fff;pointer-events:none}
+.projects-game-title{margin:0;font-size:clamp(2.15rem,5vw,4.2rem);line-height:1;letter-spacing:-.06em;text-shadow:0 3px 18px rgba(0,0,0,.35)}
+.projects-game-ui .projects-game-help{position:static;transform:none;margin:1rem 0 0;color:rgba(255,255,255,.76);font-size:.78rem;letter-spacing:.03em}
+.projects-game-start{pointer-events:auto;display:inline-flex;align-items:center;justify-content:center;margin-top:1.25rem;padding:.68rem 1rem;border:1px solid rgba(255,255,255,.3);border-radius:10px;background:rgba(7,16,25,.62);color:#fff;font-size:.78rem;font-weight:700;letter-spacing:.02em;cursor:pointer;backdrop-filter:blur(10px);transition:transform 180ms ease,background 180ms ease,border-color 180ms ease}
+.projects-game-start:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.55);background:rgba(7,16,25,.8)}
+
+.projects-game-overlay{position:absolute;inset:0;z-index:6;display:grid;place-items:center;padding:24px;background:rgba(3,10,17,.24);pointer-events:auto;opacity:1;transition:opacity 180ms ease}
+.projects-game-overlay[hidden]{display:none}
+.projects-game-panel{width:min(360px,100%);padding:20px;border:1px solid rgba(255,255,255,.2);border-radius:16px;background:rgba(7,16,25,.82);color:#fff;box-shadow:0 20px 60px rgba(0,0,0,.28);backdrop-filter:blur(18px);text-align:center}
+.projects-game-panel h2{margin:0;font-size:1.15rem;letter-spacing:-.025em}
+.projects-game-panel p{margin:.55rem 0 0;color:rgba(255,255,255,.7);font-size:.76rem;line-height:1.5}
+.projects-game-panel button{margin-top:.9rem;padding:.58rem .85rem;border:1px solid rgba(255,255,255,.25);border-radius:9px;background:rgba(255,255,255,.1);color:#fff;font-size:.76rem;font-weight:700;cursor:pointer}
+
+.projects-game-character-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.projects-game-character{display:flex!important;flex-direction:column;align-items:center;gap:8px;margin:0!important;padding:10px 6px!important;border:1px solid rgba(255,255,255,.14)!important;background:rgba(255,255,255,.05)!important}
+.projects-game-character:hover,.projects-game-character.is-selected{border-color:var(--accent)!important;background:rgba(255,255,255,.1)!important}
+.projects-game-character strong{font-size:.68rem}
+.character-preview{position:relative;width:30px;height:30px;display:block;border-radius:8px;font-size:0}
+.character-preview--chick{background:#f4d35e;border-radius:48% 48% 42% 42%}
+.character-preview--chick::before{content:"";position:absolute;width:5px;height:5px;right:5px;top:9px;border-radius:50%;background:#17232d;box-shadow:-10px 0 0 #17232d}
+.character-preview--chick::after{content:"";position:absolute;right:-3px;top:13px;border-left:7px solid #d9821b;border-top:4px solid transparent;border-bottom:4px solid transparent}
+.character-preview--frog{background:#6fbf73;border-radius:45% 45% 40% 40%}
+.character-preview--frog::before{content:"";position:absolute;left:5px;top:-5px;width:8px;height:8px;border-radius:50%;background:#6fbf73;box-shadow:12px 0 0 #6fbf73}
+.character-preview--frog::after{content:"";position:absolute;left:9px;top:11px;width:5px;height:5px;border-radius:50%;background:#17232d;box-shadow:8px 0 0 #17232d}
+.character-preview--ladybug{background:#d94c45;border-radius:50%}
+.character-preview--ladybug::before{content:"";position:absolute;left:13px;top:0;width:3px;height:30px;background:#17232d}
+.character-preview--ladybug::after{content:"";position:absolute;left:6px;top:6px;width:4px;height:4px;border-radius:50%;background:#17232d;box-shadow:14px 0 0 #17232d,0 12px 0 #17232d,14px 12px 0 #17232d}
+
+.projects-game-hud{position:absolute;top:20px;left:50%;z-index:3;width:min(100% - 40px,900px);display:flex;justify-content:space-between;gap:12px;transform:translateX(-50%);pointer-events:none;color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+.projects-game-hud span{padding:.35rem .5rem;border:1px solid rgba(255,255,255,.16);border-radius:7px;background:rgba(3,10,17,.34);backdrop-filter:blur(8px)}
+
+.projects-game-controls{position:absolute;right:16px;bottom:16px;z-index:7;display:none;grid-template-columns:repeat(3,42px);grid-template-rows:repeat(2,42px);gap:5px}
+.projects-game-controls button{border:1px solid rgba(255,255,255,.22);border-radius:9px;background:rgba(7,16,25,.58);color:#fff;font-size:.9rem;cursor:pointer;touch-action:manipulation;backdrop-filter:blur(10px)}
+.projects-game-controls button[data-direction=up]{grid-column:2}
+.projects-game-controls button[data-direction=left]{grid-column:1;grid-row:2}
+.projects-game-controls button[data-direction=down]{grid-column:2;grid-row:2}
+.projects-game-controls button[data-direction=right]{grid-column:3;grid-row:2}
+
+.projects-game-hero:not(.is-idle) .projects-game-ui{opacity:0;pointer-events:none}
+.projects-game-hero:not(.is-playing):not(.is-paused) .projects-game-hud{opacity:0}
+.projects-game-hero.is-playing .projects-game-controls{display:grid}
+.projects-game-hero.is-paused .projects-game-controls{display:grid}
+.projects-game-hero.is-playing .projects-game-ui .projects-game-start{display:none}
+
+@media(max-width:780px){
+  .projects-game-ui{width:min(100% - 28px,900px)}
+  .projects-game-ui .projects-game-help{font-size:.72rem}
+  .projects-game-hud{top:14px;width:min(100% - 28px,900px)}
+  .projects-game-controls{right:12px;bottom:12px}
+  .projects-game-character-grid{gap:6px}
+}
+@media(prefers-reduced-motion:reduce){.projects-game-start,.projects-game-overlay{transition:none}}
+
+
+.projects-game-info{
+  position:absolute;left:18px;bottom:18px;z-index:8;width:30px;height:30px;
+  display:grid;place-items:center;border:1px solid rgba(255,255,255,.22);
+  border-radius:50%;background:rgba(7,16,25,.58);color:#fff;font-size:.72rem;
+  font-weight:800;font-family:inherit;cursor:pointer;backdrop-filter:blur(10px);
+  transition:transform 180ms ease,background 180ms ease,border-color 180ms ease
+}
+.projects-game-info:hover{transform:translateY(-2px);background:rgba(7,16,25,.8);border-color:rgba(255,255,255,.5)}
+html[data-theme="day"] .projects-game-info,
+html[data-theme="day"] .projects-game-controls button{
+  background:rgba(255,248,238,.72);color:#24313a;border-color:rgba(36,49,58,.2)
+}
+html[data-theme="day"] .projects-game-info:hover,
+html[data-theme="day"] .projects-game-controls button:hover{
+  background:rgba(255,248,238,.9);border-color:rgba(36,49,58,.35)
+}
+.projects-game-info-overlay{
+  position:absolute;inset:0;z-index:9;display:grid;place-items:center;padding:24px;
+  background:rgba(3,10,17,.32);backdrop-filter:blur(2px)
+}
+.projects-game-info-overlay[hidden]{display:none}
+.projects-game-info-panel{
+  position:relative;width:min(500px,calc(100% - 24px));max-height:calc(100% - 40px);overflow:auto;padding:26px 28px;
+  border:1px solid rgba(255,255,255,.2);border-radius:18px;background:rgba(7,16,25,.9);
+  color:#fff;box-shadow:0 24px 70px rgba(0,0,0,.32);backdrop-filter:blur(18px)
+}
+.projects-game-info-panel{
+  scrollbar-width:thin;
+  scrollbar-color:var(--scroll-thumb) transparent;
+  scrollbar-gutter:stable;
+}
+.projects-game-info-panel::-webkit-scrollbar{
+  width:8px;
+}
+.projects-game-info-panel::-webkit-scrollbar-track{
+  background:transparent;
+}
+.projects-game-info-panel::-webkit-scrollbar-thumb{
+  background:var(--scroll-thumb);
+  border-radius:999px;
+}
+.projects-game-info-panel::-webkit-scrollbar-thumb:hover{
+  background:var(--accent);
+}
+
+.projects-game-info-panel h2{margin:.15rem 0 .65rem;font-size:1.35rem;letter-spacing:-.035em}
+.projects-game-info-panel>p:not(.projects-game-info-kicker):not(.projects-game-info-note){margin:0;color:rgba(255,255,255,.72);font-size:.78rem;line-height:1.6}
+.projects-game-info-kicker{margin:0 0 .3rem;color:rgba(255,255,255,.48);font-size:.62rem;font-weight:800;letter-spacing:.12em}
+.projects-game-info-note{margin:1rem 0 0!important;color:rgba(255,255,255,.5);font-size:.68rem;line-height:1.5}
+.projects-game-info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:16px}
+.projects-game-info-grid div{display:flex;flex-direction:column;gap:3px;padding:10px;border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(255,255,255,.045)}
+.projects-game-info-grid strong{font-size:.66rem}
+.projects-game-info-grid span{color:rgba(255,255,255,.58);font-size:.65rem;line-height:1.4}
+.projects-game-info-close{
+  position:absolute;top:12px;right:12px;width:30px;height:30px;border:1px solid rgba(255,255,255,.14);
+  border-radius:50%;background:rgba(255,255,255,.06);color:#fff;font-size:1rem;cursor:pointer
+}
+@media(max-width:780px){
+  .projects-game-info{left:14px;bottom:14px}
+  .projects-game-info-panel{padding:22px}
+  .projects-game-info-grid{grid-template-columns:1fr}
+}
+
+html[data-theme="day"] .projects-game-hero .hero__overlay{
+  background:linear-gradient(180deg,rgba(92,60,28,.08),rgba(82,52,24,.25)),
+             radial-gradient(circle at center,rgba(255,235,198,.12),rgba(91,58,28,.08) 100%);
+}
+
+
+html[data-theme="day"] .projects-game-info-overlay{
+  background:rgba(255,248,238,.28);
+}
+html[data-theme="day"] .projects-game-info-panel{
+  background:rgba(255,248,238,.94);
+  border-color:rgba(36,49,58,.16);
+  color:#24313a;
+  box-shadow:0 24px 70px rgba(72,54,32,.18);
+}
+html[data-theme="day"] .projects-game-info-panel>p:not(.projects-game-info-kicker):not(.projects-game-info-note),
+html[data-theme="day"] .projects-game-info-grid span{
+  color:rgba(36,49,58,.68);
+}
+html[data-theme="day"] .projects-game-info-kicker,
+html[data-theme="day"] .projects-game-info-note{
+  color:rgba(36,49,58,.48);
+}
+html[data-theme="day"] .projects-game-info-grid div{
+  border-color:rgba(36,49,58,.1);
+  background:rgba(36,49,58,.045);
+}
+html[data-theme="day"] .projects-game-info-close{
+  background:rgba(36,49,58,.06);
+  border-color:rgba(36,49,58,.14);
+  color:#24313a;
+}
