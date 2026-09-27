@@ -62,13 +62,21 @@
 
 
 .projects-game-info{
-  position:absolute;left:16px;bottom:16px;z-index:8;width:38px;height:38px;
+  position:absolute;left:18px;bottom:18px;z-index:8;width:30px;height:30px;
   display:grid;place-items:center;border:1px solid rgba(255,255,255,.22);
-  border-radius:50%;background:rgba(7,16,25,.58);color:#fff;font-size:.9rem;
+  border-radius:50%;background:rgba(7,16,25,.58);color:#fff;font-size:.72rem;
   font-weight:800;font-family:inherit;cursor:pointer;backdrop-filter:blur(10px);
   transition:transform 180ms ease,background 180ms ease,border-color 180ms ease
 }
 .projects-game-info:hover{transform:translateY(-2px);background:rgba(7,16,25,.8);border-color:rgba(255,255,255,.5)}
+html[data-theme="day"] .projects-game-info,
+html[data-theme="day"] .projects-game-controls button{
+  background:rgba(255,248,238,.72);color:#24313a;border-color:rgba(36,49,58,.2)
+}
+html[data-theme="day"] .projects-game-info:hover,
+html[data-theme="day"] .projects-game-controls button:hover{
+  background:rgba(255,248,238,.9);border-color:rgba(36,49,58,.35)
+}
 .projects-game-info-overlay{
   position:absolute;inset:0;z-index:9;display:grid;place-items:center;padding:24px;
   background:rgba(3,10,17,.32);backdrop-filter:blur(2px)
@@ -92,7 +100,12 @@
   border-radius:50%;background:rgba(255,255,255,.06);color:#fff;font-size:1rem;cursor:pointer
 }
 @media(max-width:780px){
-  .projects-game-info{left:12px;bottom:12px}
+  .projects-game-info{left:14px;bottom:14px}
   .projects-game-info-panel{padding:22px}
   .projects-game-info-grid{grid-template-columns:1fr}
+}
+
+html[data-theme="day"] .projects-game-hero .hero__overlay{
+  background:linear-gradient(180deg,rgba(92,60,28,.08),rgba(82,52,24,.25)),
+             radial-gradient(circle at center,rgba(255,235,198,.12),rgba(91,58,28,.08) 100%);
 }
