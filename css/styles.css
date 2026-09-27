@@ -138,6 +138,13 @@ html[data-theme="night"] .nav__links a.active::after {
   border: 1px solid var(--border);
   border-radius: 9px;
   color: var(--text) !important;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+.resume-link:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent) !important;
+  transform: translateY(-1px);
 }
 
 .theme-toggle, .menu-toggle {
