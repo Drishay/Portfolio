@@ -1,6 +1,6 @@
 /* =========================================================
    Shared Navigation
-   Theme control stays compact: icon only.
+   Theme control cycles Day, Night, and Anime modes.
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     '<nav class="nav" aria-label="Primary navigation">' +
       '<div class="container nav__inner">' +
         '<div class="nav__start">' +
-          '<button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to night theme" title="Switch theme"><span class="theme-icon" aria-hidden="true">☀</span></button>' +
+          '<button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to night theme" title="Switch to night theme"><span class="theme-icon" aria-hidden="true">☀</span></button>' +
           '<a class="brand" href="index.html">Drishay Chauhan</a>' +
         '</div>' +
 
