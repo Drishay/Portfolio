@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     ctx.setTransform(state.dpr,0,0,state.dpr,0,0);
     const board=getBoard();
     state.roadCount=board.roads;
-    state.laneHeight=Math.max(25,Math.min(42,state.height/(board.rows+2)));
+    state.laneHeight=Math.max(25,state.height/10);
     state.roadStart=state.laneHeight;
     buildLevel();
     draw();
