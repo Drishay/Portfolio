@@ -83,23 +83,22 @@ document.addEventListener("DOMContentLoaded",()=>{
     state.roadCount=cfg.roads;
     state.lanes=[];
     state.stops=[];
-    state.laneHeight=Math.max(28,Math.min(43,(state.height*.72)/cfg.roads));
     state.roadStart=state.height*.13;
 
-    const roadEnd=state.roadStart+cfg.roads*state.laneHeight;
-    const stopHeight=cfg.stopCount?state.laneHeight*.9:0;
-    const usable=state.height-state.roadStart-stopHeight*cfg.stopCount-state.laneHeight*.65;
-    state.laneHeight=Math.max(26,Math.min(43,usable/cfg.roads));
+    const stopAfter=[3,7];
+    const stopGap=state.level>=5?state.laneHeight*.9:0;
+    const totalRows=cfg.roads+(cfg.stopCount*1);
+    state.laneHeight=Math.max(25,Math.min(42,(state.height*.72)/totalRows));
 
+    let row=0;
     for(let i=0;i<cfg.roads;i++){
-      const y=state.roadStart+i*state.laneHeight+(i>=5&&cfg.stopCount?state.laneHeight*.45:0);
+      const y=state.roadStart+row*state.laneHeight;
       const direction=i%2===0?1:-1;
       const baseSpeed=cfg.speed+(i%3)*7;
       const cars=[];
-      const count=cfg.carsPerLane;
 
-      for(let j=0;j<count;j++){
-        const gap=state.width/count;
+      for(let j=0;j<cfg.carsPerLane;j++){
+        const gap=state.width/cfg.carsPerLane;
         cars.push({
           x:(j*gap+(i*71))%state.width,
           y:y+state.laneHeight*.19,
@@ -109,18 +108,18 @@ document.addEventListener("DOMContentLoaded",()=>{
           color:carColors[(i+j+state.level)%carColors.length]
         });
       }
+
       state.lanes.push({y,direction,cars});
+      row+=1;
+
+      if(cfg.stopCount&&stopAfter.includes(i+1)){
+        state.stops.push({y:state.roadStart+row*state.laneHeight,label:"HALT"});
+        row+=1;
+      }
     }
 
-    if(cfg.stopCount){
-      state.stops=[
-        {y:state.roadStart+5*state.laneHeight, label:"HALT"},
-        {y:state.roadStart+10*state.laneHeight, label:"HALT"}
-      ];
-    }
     resetPlayer();
   }
-
   function resetGame(){
     state.level=1;
     state.score=0;
@@ -240,6 +239,17 @@ document.addEventListener("DOMContentLoaded",()=>{
     state.animationId=requestAnimationFrame(loop);
   }
 
+  function restartCurrentLevel(){
+    state.score=Math.max(0,state.score-state.roadsCrossed);
+    state.roadsCrossed=0;
+    state.particles=[];
+    buildLevel();
+    resultOverlay.hidden=true;
+    setMode("playing");
+    state.lastTime=performance.now();
+    state.animationId=requestAnimationFrame(loop);
+  }
+
   function gameOver(){
     cancelAnimationFrame(state.animationId);
     setMode("gameover");
@@ -321,14 +331,19 @@ document.addEventListener("DOMContentLoaded",()=>{
     if(state.level>=5){
       for(const stop of state.stops){
         ctx.fillStyle=night?"#18394d":"#d5dfbd";
-        ctx.fillRect(0,stop.y,state.width,state.laneHeight*.45);
+        ctx.fillRect(0,stop.y,state.width,state.laneHeight);
         ctx.fillStyle=night?"rgba(125,164,197,.4)":"rgba(255,255,255,.55)";
         for(let x=18;x<state.width;x+=48)ctx.fillRect(x,stop.y+8,24,3);
+        ctx.fillStyle=night?"rgba(233,242,248,.42)":"rgba(23,35,45,.38)";
+        ctx.font="700 9px Manrope, sans-serif";
+        ctx.fillText(stop.label,10,stop.y+state.laneHeight*.7);
       }
     }
 
+    const lastLane=state.lanes[state.lanes.length-1];
+    const topFoot=lastLane.y+state.laneHeight;
     ctx.fillStyle=night?"#18394d":"#d5dfbd";
-    ctx.fillRect(0,roadBottom,state.width,state.height-roadBottom);
+    ctx.fillRect(0,topFoot,state.width,state.height-topFoot);
   }
 
   function drawCars(){
@@ -418,6 +433,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   restartButton?.addEventListener("click",e=>{
     e.stopPropagation();
     if(state.mode==="levelcomplete"){nextLevel();return}
+    if(state.mode==="gameover"){restartCurrentLevel();return}
     startGame();
   });
 
