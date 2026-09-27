@@ -45,7 +45,7 @@
 .projects-game-controls button[data-direction=down]{grid-column:2;grid-row:2}
 .projects-game-controls button[data-direction=right]{grid-column:3;grid-row:2}
 
-.projects-game-hero.is-playing .projects-game-ui,.projects-game-hero.is-paused .projects-game-ui{opacity:0;pointer-events:none}
+.projects-game-hero:not(.is-idle) .projects-game-ui{opacity:0;pointer-events:none}
 .projects-game-hero:not(.is-playing):not(.is-paused) .projects-game-hud{opacity:0}
 .projects-game-hero.is-playing .projects-game-controls{display:grid}
 .projects-game-hero.is-paused .projects-game-controls{display:grid}
