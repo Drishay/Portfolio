@@ -1,108 +1,70 @@
 /* =========================================================
-   Hero Rotator
-   Each theme has its own visual set and quote set.
-   A different scene is selected on each page load.
-   The scene then rotates automatically.
+   Hero Scene + Quote Rotation
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
   const image = document.getElementById("heroImage");
   const quote = document.getElementById("heroQuote");
 
-  if (!image || !quote) {
-    return;
-  }
+  if (!image || !quote) return;
 
   const scenes = {
     day: [
-      {
-        image: "assets/images/hero/day/day-01.svg",
-        quote: "Build with curiosity. Improve with intention.",
-      },
-      {
-        image: "assets/images/hero/day/day-02.svg",
-        quote: "Small steps become systems.",
-      },
-      {
-        image: "assets/images/hero/day/day-03.svg",
-        quote: "Clarity turns ideas into work.",
-      },
-      {
-        image: "assets/images/hero/day/day-04.svg",
-        quote: "Keep learning. Keep building.",
-      },
+      ["assets/images/hero/day/day-01.svg", "Build with curiosity. Improve with intention."],
+      ["assets/images/hero/day/day-02.svg", "Small steps become systems."],
+      ["assets/images/hero/day/day-03.svg", "Clarity turns ideas into work."],
+      ["assets/images/hero/day/day-04.svg", "Keep learning. Keep building."]
     ],
     night: [
-      {
-        image: "assets/images/hero/night/night-01.svg",
-        quote: "Quiet work becomes visible over time.",
-      },
-      {
-        image: "assets/images/hero/night/night-02.svg",
-        quote: "Reflection is part of building.",
-      },
-      {
-        image: "assets/images/hero/night/night-03.svg",
-        quote: "Good systems begin with good thinking.",
-      },
-      {
-        image: "assets/images/hero/night/night-04.svg",
-        quote: "Keep going, even when the work is invisible.",
-      },
-    ],
+      ["assets/images/hero/night/night-01.svg", "Quiet work becomes visible over time."],
+      ["assets/images/hero/night/night-02.svg", "Reflection is part of building."],
+      ["assets/images/hero/night/night-03.svg", "Good systems begin with good thinking."],
+      ["assets/images/hero/night/night-04.svg", "Keep going, even when the work is invisible."]
+    ]
   };
 
-  let currentIndex = -1;
+  let index = 0;
   let timer;
 
-  function currentTheme() {
-    return document.documentElement.dataset.theme === "night"
-      ? "night"
-      : "day";
-  }
+  const getTheme = () =>
+    document.documentElement.dataset.theme === "night" ? "night" : "day";
 
-  function chooseNextIndex(list) {
-    if (list.length < 2) {
-      return 0;
-    }
+  function renderScene(animate = true) {
+    const theme = getTheme();
+    const list = scenes[theme];
+    const scene = list[index % list.length];
 
-    let next = Math.floor(Math.random() * list.length);
-
-    while (next === currentIndex) {
-      next = Math.floor(Math.random() * list.length);
-    }
-
-    return next;
-  }
-
-  function showScene(instant = false) {
-    const list = scenes[currentTheme()];
-    currentIndex = chooseNextIndex(list);
-    const scene = list[currentIndex];
-
-    if (!instant) {
+    if (animate) {
       image.classList.add("is-changing");
+      quote.classList.add("is-changing");
     }
 
     window.setTimeout(() => {
-      image.src = scene.image;
-      image.alt = "Abstract " + currentTheme() + " landscape";
-      quote.textContent = scene.quote;
+      image.src = scene[0];
+      image.alt = theme + " mountain landscape";
+      quote.textContent = scene[1];
       image.classList.remove("is-changing");
-    }, instant ? 0 : 420);
+      quote.classList.remove("is-changing");
+    }, animate ? 360 : 0);
   }
 
-  function restartRotation() {
-    window.clearInterval(timer);
-    timer = window.setInterval(() => showScene(false), 9000);
+  function nextScene() {
+    index += 1;
+    renderScene(true);
   }
 
-  showScene(true);
-  restartRotation();
+  function restart() {
+    clearInterval(timer);
+    timer = window.setInterval(nextScene, 8500);
+  }
+
+  // Render immediately from the real SVG path.
+  renderScene(false);
+  restart();
 
   document.addEventListener("themechange", () => {
-    currentIndex = -1;
-    showScene(false);
-    restartRotation();
+    index = 0;
+    renderScene(true);
+    restart();
   });
 });
