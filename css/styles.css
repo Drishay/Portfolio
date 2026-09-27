@@ -170,7 +170,7 @@ html[data-theme="night"] .nav__links a.active::after {
 .hero {
   position: relative;
   min-height: 430px;
-  height: clamp(430px, 58vh, 620px);
+  height: clamp(380px, 50vh, 540px);
   overflow: hidden;
   display: grid;
   place-items: center;
@@ -720,8 +720,8 @@ html[data-theme="night"] .meta {
 /* Secondary page heroes — same composition as the home hero */
 .page-hero {
   position: relative;
-  min-height: 430px;
-  height: clamp(430px, 58vh, 620px);
+  min-height: 380px;
+  height: clamp(380px, 50vh, 540px);
   overflow: hidden;
   display: grid;
   place-items: center;
@@ -775,5 +775,59 @@ html[data-theme="night"] .page-hero__quote { color: var(--accent); }
 
   .page-hero__content h1 {
     font-size: clamp(2.15rem, 11vw, 3.3rem);
+  }
+}
+
+/* Theme-aware brand */
+html[data-theme="day"] .brand {
+  color: var(--warm);
+  text-shadow: 0 0 14px rgba(217, 130, 27, 0.14);
+}
+html[data-theme="night"] .brand {
+  color: var(--accent);
+  text-shadow: 0 0 16px rgba(77, 120, 163, 0.16);
+}
+
+/* Scrollbar: quiet until the pointer reaches the edge */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+html:hover {
+  scrollbar-color: var(--scroll-thumb) transparent;
+}
+:root { --scroll-thumb: rgba(185, 104, 18, 0.62); }
+html[data-theme="night"] { --scroll-thumb: rgba(77, 120, 163, 0.68); }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 999px;
+}
+html:hover::-webkit-scrollbar-thumb { background: var(--scroll-thumb); }
+
+/* Filter layout */
+.filter-heading {
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+.filter-heading .filters {
+  justify-content: flex-end;
+  margin-top: 0;
+  max-width: 650px;
+}
+.skill-card[hidden],
+.project[hidden] {
+  display: none;
+}
+@media (max-width: 780px) {
+  .filter-heading .filters {
+    justify-content: flex-start;
+    max-width: none;
+  }
+  .page-hero,
+  .hero {
+    min-height: 380px;
+    height: 50vh;
   }
 }

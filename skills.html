@@ -34,8 +34,27 @@
   <main>
 
     <section class="section">
-      <div class="container glass-grid">
-        <article class="glass-card">
+      <div class="container">
+        <div class="section-heading filter-heading">
+          <div>
+            <p class="section-label">Explore by category</p>
+            <h2>Skills & capabilities.</h2>
+          </div>
+          <div class="filters skill-filters" role="group" aria-label="Filter skills">
+            <button class="filter active" type="button" data-skill-filter="all">All</button>
+            <button class="filter" type="button" data-skill-filter="programming">Programming</button>
+            <button class="filter" type="button" data-skill-filter="web">Web</button>
+            <button class="filter" type="button" data-skill-filter="cs">CS</button>
+            <button class="filter" type="button" data-skill-filter="testing">Testing</button>
+            <button class="filter" type="button" data-skill-filter="data">Data / AI</button>
+            <button class="filter" type="button" data-skill-filter="tools">Tools</button>
+            <button class="filter" type="button" data-skill-filter="database">Databases</button>
+            <button class="filter" type="button" data-skill-filter="professional">Professional</button>
+          </div>
+        </div>
+      </div>
+      <div class="container glass-grid" id="skillGrid">
+        <article class="glass-card skill-card" data-skill-category="programming">
           <p class="meta">01 · Programming</p>
           <h2>Programming Languages</h2>
           <div class="badge-row">
@@ -47,7 +66,7 @@
           </div>
         </article>
 
-        <article class="glass-card">
+        <article class="glass-card skill-card" data-skill-category="web">
           <p class="meta">02 · Web</p>
           <h2>Web Development</h2>
           <div class="badge-row">
@@ -59,7 +78,7 @@
           </div>
         </article>
 
-        <article class="glass-card">
+        <article class="glass-card skill-card" data-skill-category="cs">
           <p class="meta">03 · Foundations</p>
           <h2>Computer Science</h2>
           <div class="badge-row">
@@ -72,7 +91,7 @@
           </div>
         </article>
 
-        <article class="glass-card">
+        <article class="glass-card skill-card" data-skill-category="testing">
           <p class="meta">04 · Quality</p>
           <h2>Testing & Quality</h2>
           <div class="badge-row">
@@ -92,7 +111,7 @@
           </div>
         </article>
 
-        <article class="glass-card">
+        <article class="glass-card skill-card" data-skill-category="data">
           <p class="meta">05 · Data & AI</p>
           <h2>Data / AI</h2>
           <div class="badge-row">
@@ -108,7 +127,7 @@
           </div>
         </article>
 
-        <article class="glass-card">
+        <article class="glass-card skill-card" data-skill-category="tools">
           <p class="meta">06 · Tools</p>
           <h2>Tools & Platforms</h2>
           <div class="badge-row">
@@ -122,7 +141,7 @@
           </div>
         </article>
 
-        <article class="glass-card">
+        <article class="glass-card skill-card" data-skill-category="database">
           <p class="meta">07 · Databases</p>
           <h2>Databases</h2>
           <div class="badge-row">
@@ -131,7 +150,7 @@
           </div>
         </article>
 
-        <article class="glass-card">
+        <article class="glass-card skill-card" data-skill-category="professional">
           <p class="meta">08 · Professional</p>
           <h2>Professional Skills</h2>
           <div class="badge-row">
@@ -155,5 +174,6 @@
   <script src="js/main.js" defer></script>
   <script src="js/animations.js" defer></script>
   <script src="js/pageHero.js" defer></script>
+  <script src="js/skills.js" defer></script>
 </body>
 </html>
