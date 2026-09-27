@@ -45,6 +45,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const menu = document.getElementById("mobileMenu");
   const menuButton = document.getElementById("menuToggle");
+  const themeButton = document.getElementById("themeToggle");
+
+  const syncThemeButton = (theme) => {
+    const icons = { day: "☀", night: "☾", anime: "🌸" };
+    const labels = {
+      day: "Switch to night theme",
+      night: "Switch to anime theme",
+      anime: "Switch to day theme",
+    };
+
+    if (!themeButton) return;
+
+    const currentTheme = theme || PortfolioTheme.get();
+    const icon = themeButton.querySelector(".theme-icon");
+    if (icon) icon.textContent = icons[currentTheme] || icons.day;
+
+    const label = labels[currentTheme] || labels.day;
+    themeButton.setAttribute("aria-label", label);
+    themeButton.setAttribute("title", label);
+  };
+
+  syncThemeButton(PortfolioTheme.get());
+
+  document.addEventListener("themechange", (event) => {
+    syncThemeButton(event.detail?.theme);
+  });
 
   menuButton?.addEventListener("click", () => {
     const isOpen = menu.classList.toggle("open");
@@ -58,6 +84,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  document.getElementById("themeToggle")
-    ?.addEventListener("click", () => PortfolioTheme.toggle());
+  themeButton?.addEventListener("click", () => PortfolioTheme.toggle());
 });
