@@ -56,9 +56,10 @@ document.addEventListener("DOMContentLoaded",()=>{
     const expanded=state.level>=5;
     return {
       roads:7,
-      speed:48+(state.level-1)*11,
-      playerDuration:Math.max(.075,.16-(state.level-1)*.012),
-      carsPerLane:state.level>=6?3:2
+      speed:48,
+      difficulty:1+(state.level-1)*0.105,
+      playerDuration:Math.max(.065,.16-(state.level-1)*.014),
+      carsPerLane:Math.min(4,2+Math.floor((state.level-1)/2))
     };
   }
 
@@ -123,17 +124,29 @@ document.addEventListener("DOMContentLoaded",()=>{
       const baseSpeed=cfg.speed+(i%3)*7;
       const cars=[];
 
+      // Randomized spawn pattern: shuffle lane slots and add jitter so
+      // every level has a different traffic arrangement.
+      const slots=Array.from({length:cfg.carsPerLane},(_,index)=>index);
+      for(let k=slots.length-1;k>0;k--){
+        const swap=Math.floor(Math.random()*(k+1));
+        [slots[k],slots[swap]]=[slots[swap],slots[k]];
+      }
+
+      const gap=state.width/cfg.carsPerLane;
       for(let j=0;j<cfg.carsPerLane;j++){
-        const gap=state.width/cfg.carsPerLane;
-        const color=carColors[(i+j+state.level)%carColors.length];
+        const color=carColors[Math.floor(Math.random()*carColors.length)];
         const colorMultiplier=carSpeedByColor[color]||1;
         const laneMultiplier=(i>=2&&i<=5)?1.22:0.92;
+        const randomOffset=(Math.random()-.5)*gap*.62;
+        const randomSpeed=.88+Math.random()*.28;
+        const spawnSlot=slots[j];
+        const laneDifficulty=cfg.difficulty;
         cars.push({
-          x:(j*gap+(i*71))%state.width,
+          x:(spawnSlot*gap+gap*.5+randomOffset+state.width)%state.width,
           y:y+state.laneHeight*.19,
           width:42+(i%3)*8,
           height:state.laneHeight*.58,
-          speed:baseSpeed*colorMultiplier*laneMultiplier*direction*(.88+(j%2)*.12),
+          speed:cfg.speed*laneDifficulty*colorMultiplier*laneMultiplier*randomSpeed*direction,
           color
         });
       }
