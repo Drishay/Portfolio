@@ -24,6 +24,9 @@ document.addEventListener("DOMContentLoaded",()=>{
   const levelEl=document.querySelector("#projectsGameLevel");
   const stateEl=document.querySelector("#projectsGameState");
   const controls=document.querySelector("#projectsGameControls");
+  const infoButton=document.querySelector("#projectsGameInfo");
+  const infoOverlay=document.querySelector("#projectsGameInfoOverlay");
+  const infoClose=document.querySelector("#projectsGameInfoClose");
 
   const state={
     mode:"idle", level:1, score:0, character:"chick", lastTime:0, animationId:0,
@@ -53,13 +56,12 @@ document.addEventListener("DOMContentLoaded",()=>{
   const isNight=()=>document.documentElement.dataset.theme==="night";
 
   function configForLevel(){
-    const expanded=state.level>=5;
     return {
-      roads:7,
+      roads:8,
       speed:48,
       difficulty:1+(state.level-1)*0.105,
       playerDuration:Math.max(.065,.16-(state.level-1)*.014),
-      carsPerLane:Math.min(4,2+Math.floor((state.level-1)/2))
+      carsPerLane:Math.min(5,3+Math.floor((state.level-1)/2))
     };
   }
 
@@ -138,7 +140,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         const colorMultiplier=carSpeedByColor[color]||1;
         const laneMultiplier=(i>=2&&i<=5)?1.22:0.92;
         const randomOffset=(Math.random()-.5)*gap*.62;
-        const randomSpeed=.88+Math.random()*.28;
+        const randomSpeed=.94+Math.random()*.22;
         const spawnSlot=slots[j];
         const laneDifficulty=cfg.difficulty;
         cars.push({
@@ -337,6 +339,23 @@ document.addEventListener("DOMContentLoaded",()=>{
       if(lane.direction<0&&car.x+car.width<0)car.x=state.width+car.width;
     }
 
+    for(const lane of state.lanes){
+      if(lane.cars.length<2)continue;
+      const ordered=[...lane.cars].sort((a,b)=>a.x-b.x);
+      let largestGap=-1, gapIndex=0;
+      for(let i=0;i<ordered.length;i++){
+        const current=ordered[i];
+        const next=i===ordered.length-1?ordered[0].x+state.width:ordered[i+1].x;
+        const gap=next-current.x;
+        if(gap>largestGap){largestGap=gap;gapIndex=i;}
+      }
+      const maxGap=Math.max(state.width/lane.cars.length*1.9,150);
+      if(largestGap>maxGap){
+        const car=ordered[gapIndex];
+        car.x=lane.direction>0?-car.width:state.width+car.width;
+      }
+    }
+
     for(const particle of state.particles){particle.x+=particle.vx*dt;particle.y+=particle.vy*dt;particle.life-=dt}
     state.particles=state.particles.filter(particle=>particle.life>0);
 
@@ -505,6 +524,19 @@ document.addEventListener("DOMContentLoaded",()=>{
     if(state.mode==="levelcomplete"){nextLevel();return}
     if(state.mode==="gameover"){restartCurrentLevel();return}
     startGame();
+  });
+
+  infoButton?.addEventListener("click",e=>{
+    e.stopPropagation();
+    if(state.mode==="playing")pauseGame();
+    infoOverlay.hidden=false;
+  });
+  infoClose?.addEventListener("click",e=>{
+    e.stopPropagation();
+    infoOverlay.hidden=true;
+  });
+  infoOverlay?.addEventListener("click",e=>{
+    if(e.target===infoOverlay)infoOverlay.hidden=true;
   });
 
   controls?.querySelectorAll("button").forEach(button=>button.addEventListener("pointerdown",e=>{
