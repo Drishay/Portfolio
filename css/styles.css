@@ -169,7 +169,7 @@ html[data-theme="night"] .nav__links a.active::after {
 /* Hero */
 .hero {
   position: relative;
-  min-height: 430px;
+  min-height: 380px;
   height: clamp(380px, 50vh, 540px);
   overflow: hidden;
   display: grid;
@@ -603,8 +603,8 @@ html[data-theme="night"] .cursor-glow { opacity: 0.17; }
   .menu-toggle { display: block; }
 
   .hero {
-    min-height: 420px;
-    height: 62vh;
+    min-height: 380px;
+    height: 50vh;
   }
 
   .hero__image {
@@ -769,8 +769,8 @@ html[data-theme="night"] .page-hero__quote { color: var(--accent); }
 
 @media (max-width: 780px) {
   .page-hero {
-    min-height: 420px;
-    height: 62vh;
+    min-height: 380px;
+    height: 50vh;
   }
 
   .page-hero__content h1 {
@@ -788,23 +788,35 @@ html[data-theme="night"] .brand {
   text-shadow: 0 0 16px rgba(77, 120, 163, 0.16);
 }
 
-/* Scrollbar: quiet until the pointer reaches the edge */
+/* Scrollbar: hidden until the pointer reaches the right edge */
+:root { --scroll-thumb: rgba(185, 104, 18, 0.62); }
+html[data-theme="night"] { --scroll-thumb: rgba(77, 120, 163, 0.68); }
+
 html {
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
 }
-html:hover {
+
+html.scrollbar-visible {
   scrollbar-color: var(--scroll-thumb) transparent;
 }
-:root { --scroll-thumb: rgba(185, 104, 18, 0.62); }
-html[data-theme="night"] { --scroll-thumb: rgba(77, 120, 163, 0.68); }
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 ::-webkit-scrollbar-thumb {
   background: transparent;
   border-radius: 999px;
 }
-html:hover::-webkit-scrollbar-thumb { background: var(--scroll-thumb); }
+
+html.scrollbar-visible::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+}
 
 /* Filter layout */
 .filter-heading {
