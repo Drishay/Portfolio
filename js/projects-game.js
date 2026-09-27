@@ -126,25 +126,25 @@ document.addEventListener("DOMContentLoaded",()=>{
       const baseSpeed=cfg.speed+(i%3)*7;
       const cars=[];
 
-      // Randomized spawn pattern: shuffle lane slots and add jitter so
-      // every level has a different traffic arrangement.
+      // Randomized but collision-safe traffic: shuffle the phase and
+      // color/speed assignment, while keeping fixed lane spacing.
+      const phase=Math.random()*state.width;
+      const gap=Math.max(92,state.width/cfg.carsPerLane);
       const slots=Array.from({length:cfg.carsPerLane},(_,index)=>index);
       for(let k=slots.length-1;k>0;k--){
         const swap=Math.floor(Math.random()*(k+1));
         [slots[k],slots[swap]]=[slots[swap],slots[k]];
       }
 
-      const gap=state.width/cfg.carsPerLane;
       for(let j=0;j<cfg.carsPerLane;j++){
         const color=carColors[Math.floor(Math.random()*carColors.length)];
         const colorMultiplier=carSpeedByColor[color]||1;
         const laneMultiplier=(i>=2&&i<=5)?1.22:0.92;
-        const randomOffset=(Math.random()-.5)*gap*.62;
         const randomSpeed=.94+Math.random()*.22;
         const spawnSlot=slots[j];
         const laneDifficulty=cfg.difficulty;
         cars.push({
-          x:(spawnSlot*gap+gap*.5+randomOffset+state.width)%state.width,
+          x:(phase+spawnSlot*gap)%state.width,
           y:y+state.laneHeight*.19,
           width:42+(i%3)*8,
           height:state.laneHeight*.58,
@@ -337,23 +337,6 @@ document.addEventListener("DOMContentLoaded",()=>{
       car.x+=car.speed*dt;
       if(lane.direction>0&&car.x-car.width>state.width)car.x=-car.width;
       if(lane.direction<0&&car.x+car.width<0)car.x=state.width+car.width;
-    }
-
-    for(const lane of state.lanes){
-      if(lane.cars.length<2)continue;
-      const ordered=[...lane.cars].sort((a,b)=>a.x-b.x);
-      let largestGap=-1, gapIndex=0;
-      for(let i=0;i<ordered.length;i++){
-        const current=ordered[i];
-        const next=i===ordered.length-1?ordered[0].x+state.width:ordered[i+1].x;
-        const gap=next-current.x;
-        if(gap>largestGap){largestGap=gap;gapIndex=i;}
-      }
-      const maxGap=Math.max(state.width/lane.cars.length*1.9,150);
-      if(largestGap>maxGap){
-        const car=ordered[gapIndex];
-        car.x=lane.direction>0?-car.width:state.width+car.width;
-      }
     }
 
     for(const particle of state.particles){particle.x+=particle.vx*dt;particle.y+=particle.vy*dt;particle.life-=dt}
