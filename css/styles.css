@@ -384,9 +384,9 @@ html[data-theme="night"] .hero__author {
   gap: 12px;
   margin: 0 2px 9px;
   color: var(--text-muted);
-  font-size: 0.59rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.11em;
 }
 
 .profile-frame__caption {
@@ -399,13 +399,13 @@ html[data-theme="night"] .hero__author {
 
 .profile-frame__caption strong {
   color: var(--text);
-  font-size: 0.92rem;
+  font-size: 1rem;
   letter-spacing: -0.025em;
 }
 
 .profile-frame__caption span {
   color: var(--text-muted);
-  font-size: 0.62rem;
+  font-size: 0.74rem;
   text-align: right;
 }
 
@@ -953,4 +953,11 @@ html.scrollbar-visible::-webkit-scrollbar-thumb {
   .profile-frame {
     margin-inline: 0;
   }
+}
+
+
+/* Centered portfolio footer */
+.footer__inner {
+  justify-content: center;
+  text-align: center;
 }
