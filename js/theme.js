@@ -8,7 +8,7 @@
   function getInitialTheme() {
     const savedTheme = localStorage.getItem(STORAGE_KEY);
 
-    if (savedTheme === "day" || savedTheme === "night") {
+    if (savedTheme === "day" || savedTheme === "night" || savedTheme === "anime") {
       return savedTheme;
     }
 
@@ -25,10 +25,11 @@
     const themeIcon = themeButton?.querySelector(".theme-icon");
 
     if (themeButton && themeIcon) {
-      const isNight = theme === "night";
-      themeIcon.textContent = isNight ? "☾" : "☀";
-      themeButton.setAttribute("aria-label", isNight ? "Switch to day theme" : "Switch to night theme");
-      themeButton.setAttribute("title", isNight ? "Switch to day theme" : "Switch to night theme");
+      const icons = { day: "☀", night: "☾", anime: "🌸" };
+      const labels = { day: "Switch to night theme", night: "Switch to anime theme", anime: "Switch to day theme" };
+      themeIcon.textContent = icons[theme] || icons.day;
+      themeButton.setAttribute("aria-label", labels[theme] || labels.day);
+      themeButton.setAttribute("title", labels[theme] || labels.day);
     }
 
     document.dispatchEvent(
@@ -39,11 +40,14 @@
   }
 
   function toggleTheme() {
-    const currentTheme = document.documentElement.dataset.theme === "night"
+    const currentTheme = document.documentElement.dataset.theme;
+    const nextTheme = currentTheme === "day"
       ? "night"
-      : "day";
+      : currentTheme === "night"
+        ? "anime"
+        : "day";
 
-    applyTheme(currentTheme === "night" ? "day" : "night");
+    applyTheme(nextTheme);
   }
 
   window.PortfolioTheme = {
