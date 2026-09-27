@@ -988,3 +988,6 @@ html.scrollbar-visible::-webkit-scrollbar-thumb {
     font-size: 1.65rem;
   }
 }
+
+/* Calmer secondary-page hero quotes */
+.page-hero__quote{width:min(100%,620px);margin-inline:auto;font-size:clamp(.82rem,1.35vw,.96rem);line-height:1.45;font-weight:500;letter-spacing:-.01em;opacity:.9}.page-hero__author{margin-top:.5rem;font-size:.72rem;opacity:.7}@media(max-width:780px){.page-hero__quote{width:min(100%,420px);font-size:.82rem}}
