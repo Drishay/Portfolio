@@ -59,3 +59,40 @@
   .projects-game-character-grid{gap:6px}
 }
 @media(prefers-reduced-motion:reduce){.projects-game-start,.projects-game-overlay{transition:none}}
+
+
+.projects-game-info{
+  position:absolute;left:16px;bottom:16px;z-index:8;width:38px;height:38px;
+  display:grid;place-items:center;border:1px solid rgba(255,255,255,.22);
+  border-radius:50%;background:rgba(7,16,25,.58);color:#fff;font-size:.9rem;
+  font-weight:800;font-family:inherit;cursor:pointer;backdrop-filter:blur(10px);
+  transition:transform 180ms ease,background 180ms ease,border-color 180ms ease
+}
+.projects-game-info:hover{transform:translateY(-2px);background:rgba(7,16,25,.8);border-color:rgba(255,255,255,.5)}
+.projects-game-info-overlay{
+  position:absolute;inset:0;z-index:9;display:grid;place-items:center;padding:24px;
+  background:rgba(3,10,17,.32);backdrop-filter:blur(2px)
+}
+.projects-game-info-overlay[hidden]{display:none}
+.projects-game-info-panel{
+  position:relative;width:min(500px,calc(100% - 24px));padding:26px 28px;
+  border:1px solid rgba(255,255,255,.2);border-radius:18px;background:rgba(7,16,25,.9);
+  color:#fff;box-shadow:0 24px 70px rgba(0,0,0,.32);backdrop-filter:blur(18px)
+}
+.projects-game-info-panel h2{margin:.15rem 0 .65rem;font-size:1.35rem;letter-spacing:-.035em}
+.projects-game-info-panel>p:not(.projects-game-info-kicker):not(.projects-game-info-note){margin:0;color:rgba(255,255,255,.72);font-size:.78rem;line-height:1.6}
+.projects-game-info-kicker{margin:0 0 .3rem;color:rgba(255,255,255,.48);font-size:.62rem;font-weight:800;letter-spacing:.12em}
+.projects-game-info-note{margin:1rem 0 0!important;color:rgba(255,255,255,.5);font-size:.68rem;line-height:1.5}
+.projects-game-info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:16px}
+.projects-game-info-grid div{display:flex;flex-direction:column;gap:3px;padding:10px;border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(255,255,255,.045)}
+.projects-game-info-grid strong{font-size:.66rem}
+.projects-game-info-grid span{color:rgba(255,255,255,.58);font-size:.65rem;line-height:1.4}
+.projects-game-info-close{
+  position:absolute;top:12px;right:12px;width:30px;height:30px;border:1px solid rgba(255,255,255,.14);
+  border-radius:50%;background:rgba(255,255,255,.06);color:#fff;font-size:1rem;cursor:pointer
+}
+@media(max-width:780px){
+  .projects-game-info{left:12px;bottom:12px}
+  .projects-game-info-panel{padding:22px}
+  .projects-game-info-grid{grid-template-columns:1fr}
+}
