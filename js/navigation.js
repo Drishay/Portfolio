@@ -25,8 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         '<div class="nav__links">' +
           '<a class="' + isActive("index.html") + '" href="index.html">Home</a>' +
-          '<a class="' + isActive("skills.html") + '" href="skills.html">Skills</a>' +
           '<a class="' + isActive("journey.html") + '" href="journey.html">Journey</a>' +
+          '<a class="' + isActive("skills.html") + '" href="skills.html">Skills</a>' +
           '<a class="' + isActive("projects.html") + '" href="projects.html">Projects</a>' +
           '<a class="resume-link" href="assets/resume/Drishay_Chauhan_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>' +
         '</div>' +
@@ -36,8 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       '<div class="mobile-menu" id="mobileMenu">' +
         '<a href="index.html">Home</a>' +
-        '<a href="skills.html">Skills</a>' +
         '<a href="journey.html">Journey</a>' +
+        '<a href="skills.html">Skills</a>' +
         '<a href="projects.html">Projects</a>' +
         '<a href="assets/resume/Drishay_Chauhan_Resume.pdf" target="_blank">Resume</a>' +
       '</div>' +
