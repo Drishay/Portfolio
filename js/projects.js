@@ -1,1 +1,29 @@
-document.addEventListener("DOMContentLoaded",()=>{const buttons=document.querySelectorAll(".filter"),cards=document.querySelectorAll(".project");buttons.forEach(b=>b.addEventListener("click",()=>{buttons.forEach(x=>x.classList.remove("active"));b.classList.add("active");const f=b.dataset.filter;cards.forEach(c=>c.hidden=f!=="all"&&c.dataset.category!==f)}))});
+/* =========================================================
+   Project Filtering
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const filters = document.querySelectorAll(".filter");
+  const projects = document.querySelectorAll(".project");
+
+  filters.forEach((filterButton) => {
+    filterButton.addEventListener("click", () => {
+      const selectedFilter = filterButton.dataset.filter;
+
+      filters.forEach((button) => button.classList.remove("active"));
+      filterButton.classList.add("active");
+
+      projects.forEach((project) => {
+        const category = project.dataset.category;
+        const isFeatured = project.dataset.featured === "true";
+
+        const visible =
+          selectedFilter === "all" ||
+          (selectedFilter === "featured" && isFeatured) ||
+          category === selectedFilter;
+
+        project.hidden = !visible;
+      });
+    });
+  });
+});
