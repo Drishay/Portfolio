@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   footer.innerHTML =
     '<footer class="footer">' +
       '<div class="container footer__inner">' +
-        '<span>Drishay Chauhan · Building things with clarity and purpose · © 2026</span>' +
+        '<span>Drishay Chauhan © 2026</span>' +
       '</div>' +
     '</footer>';
 });
