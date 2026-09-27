@@ -13,13 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
       ["assets/images/home/day/home-01.svg", "Build with curiosity. Improve with intention."],
       ["assets/images/home/day/home-02.svg", "Small steps become systems."],
       ["assets/images/home/day/home-03.svg", "Clarity turns ideas into work."],
-      ["assets/images/home/day/home-04.svg", "Keep learning. Keep building."]
+      ["assets/images/home/day/home-04.svg",
+    "assets/images/home/day/home-05.svg", "Keep learning. Keep building."]
     ],
     night: [
       ["assets/images/home/night/home-01.svg", "Quiet work becomes visible over time."],
       ["assets/images/home/night/home-02.svg", "Reflection is part of building."],
       ["assets/images/home/night/home-03.svg", "Good systems begin with good thinking."],
-      ["assets/images/home/night/home-04.svg", "Keep going, even when the work is invisible."]
+      ["assets/images/home/night/home-04.svg",
+    "assets/images/home/night/home-05.svg", "Keep going, even when the work is invisible."]
     ]
   };
 
